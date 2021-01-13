@@ -10,7 +10,10 @@
       <v-img
         :src="logo"
         max-height="auto"
-        max-width="250"
+        class="ma-12"
+        height="70%"
+        max-width="600px"
+        width="70%"
       />
     </v-row>
   </v-container>
@@ -18,10 +21,10 @@
 
 <script>
 export default {
-  name: 'PáginaInício',
+  name: 'PGinaInCio',
   data () {
     return {
-      logo: require('@/assets/logo.png')
+      logo: require('@/assets/logo_inicio.png')
     }
   }
 }

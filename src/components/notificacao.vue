@@ -4,31 +4,36 @@
     :color="notificacao.cor"
     :timeout="notificacao.tempo"
     class="notificacao"
-    app
+    rounded="lg"
+    center
     top
   >
-    <div class="notificacao-icone">
-      <div class="notificacao-icone-aux">
-        <v-icon
-          dark
-          size="30"
-        >
-          {{ notificacao.icone }}
-        </v-icon>
+    <div class="d-flex">
+      <div class="notificacao-icone d-flex align-self-auto">
+        <div class="align-self-center">
+          <v-icon
+            dark
+            size="30"
+          >
+            {{ notificacao.icone }}
+          </v-icon>
+        </div>
       </div>
-      </div>
-    <div
-      v-html="notificacao.mensagem"
-      class="notificacao-texto"
-    />
+
+      <!-- eslint-disable vue/no-v-html -->
+      <div
+        class="align-self-center ml-3 mr-2"
+        v-html="notificacao.mensagem"
+      />
+      <!-- eslint-enable vue/no-v-html -->
+    </div>
+
     <template v-slot:action>
       <v-btn
-        @click="ativo = false"
-        class="notificacao-close"
-        dark
         icon
+        @click="ativo = false"
       >
-        <v-icon>
+        <v-icon dark>
           mdi-close
         </v-icon>
       </v-btn>
@@ -40,7 +45,7 @@
 import { mapMutations, mapState } from 'vuex'
 
 export default {
-  name: 'ComponenteNotificação',
+  name: 'ComponenteNotificacao',
   computed: {
     ...mapState('app', [
       'notificacao'
@@ -73,33 +78,16 @@ export default {
 <style lang="scss">
   .notificacao {
     .v-snack__wrapper {
-
       .v-snack__content {
-        display: flex !important;
-        height: auto;
         padding: 0px;
       }
     }
   }
 
   .notificacao-icone {
-    align-self: normal;
     background-color: rgba(0, 0, 0, 0.1);
-    border-top-left-radius: 5px;
-    border-bottom-left-radius: 5px;
-    padding: 0 25px 0 25px;
-    top: 50%;
-  }
-
-  .notificacao-icone-aux {
-    padding-top: 11px !important;
-    padding-bottom: 11px !important;
-    position: sticky;
-    top: 13%;
-  }
-
-  .notificacao-texto {
-    align-self: center;
-    margin-left: 15px;
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+    padding: 20px;
   }
 </style>

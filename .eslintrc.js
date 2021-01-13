@@ -3,16 +3,17 @@ module.exports = {
   env: {
     node: true
   },
-  extends: [
-    'plugin:vue/essential',
+  'extends': [
+    'plugin:vue/recommended',
     '@vue/standard'
   ],
+  rules: {
+    // 'no-console': 'warn',
+    'no-debugger': 'error',
+    'sort-imports': 2,
+    'vue/eqeqeq': 'error'
+  },
   parserOptions: {
     parser: 'babel-eslint'
-  },
-  rules: {
-    'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
-    'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
-    'sort-imports': 2
   }
 }

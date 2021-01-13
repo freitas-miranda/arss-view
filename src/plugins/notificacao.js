@@ -7,12 +7,12 @@ const notificacao = (mensagem, tipo) => {
     cor: '',
     icone: '',
     mensagem: '',
-    tempo: 0
+    tempo: -1
   })
 
   let cor = ''
   let icone = ''
-  const tempo = 5000
+  let tempo = 5000
 
   switch (tipo) {
     case undefined:

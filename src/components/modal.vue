@@ -1,84 +1,39 @@
 <template>
   <v-dialog
-    v-model="modal"
-    :fullscreen="$vuetify.breakpoint.xs"
+    :value="value"
     :width="largura"
     persistent
   >
     <v-card>
       <v-toolbar
-        color="primary"
+        class="toolbar-modal"
         dark
-        dense
+        flat
       >
         <v-btn
-          @click="modal = false"
           dark
           icon
-          title="Fechar"
+          @click="$emit('input', false)"
         >
           <v-icon>
             mdi-close
           </v-icon>
         </v-btn>
-        <v-toolbar-title class="titulo-modal pl-1 text-h6">
+        <v-toolbar-title class="text-h6">
           {{ titulo }}
         </v-toolbar-title>
+        <v-spacer />
+        <slot name="maisOpcoes" />
       </v-toolbar>
-      <v-divider class="divider-modal"/>
-      <v-card-text class="pa-2">
-        <slot/>
+      <v-card-text
+        v-if="value"
+        class="scroll-modal"
+      >
+        <slot />
       </v-card-text>
-      <divisao/>
-      <v-card-actions>
-        <span
-          v-if="camposObrigatorios"
-          class="ml-1 text-caption"
-        >
-          <b style="color: Red;">
-            *
-          </b>
-          &nbsp; Campos obrigatórios
-        </span>
-        <v-spacer/>
-        <v-btn
-          v-if="adicionar || editar"
-          :loading="loading"
-          @click="$emit('confirmar')"
-          color="primary"
-          small
-          title="Confirmar"
-        >
-          <v-icon left>
-            mdi-content-save
-          </v-icon>
-          Confirmar
-        </v-btn>
-        <v-btn
-          v-if="exibir"
-          :loading="loading"
-          @click="$emit('editar')"
-          color="primary"
-          small
-          title="Editar"
-        >
-          <v-icon left>
-            mdi-lead-pencil
-          </v-icon>
-          Editar
-        </v-btn>
-        <v-btn
-          :loading="loading"
-          @click="modal = false"
-          color="error"
-          small
-          title="Cancelar"
-        >
-          <v-icon left>
-            mdi-close-circle-outline
-          </v-icon>
-          Cancelar
-        </v-btn>
+      <v-divider v-if="!ocultarRodape" />
+      <v-card-actions v-if="!ocultarRodape">
+        <slot name="acao" />
       </v-card-actions>
     </v-card>
   </v-dialog>
@@ -87,37 +42,13 @@
 <script>
 export default {
   name: 'ComponenteModal',
-  computed: {
-    modal: {
-      get () {
-        return this.value
-      },
-      set (valor) {
-        this.$emit('input', valor)
-      }
-    }
-  },
   props: {
-    adicionar: {
-      default: false,
-      type: Boolean
-    },
-    camposObrigatorios: {
-      default: false,
-      type: Boolean
-    },
-    editar: {
-      default: false,
-      type: Boolean
-    },
-    exibir: {
-      default: false,
-      type: Boolean
-    },
     largura: {
+      default: 1200,
       type: [Number, String]
     },
-    loading: {
+    ocultarRodape: {
+      default: false,
       type: Boolean
     },
     titulo: {
@@ -125,6 +56,7 @@ export default {
       type: String
     },
     value: {
+      default: false,
       required: true,
       type: Boolean
     }
@@ -132,13 +64,13 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-  .divider-modal {
-    background-color: #009C4D;
-    min-height: 3px;
+<style lang="scss">
+  .toolbar-modal {
+    background: linear-gradient(90deg, rgba(0,121,107,1) 0%, rgb(21, 146, 129) 100%) !important;
   }
 
-  .titulo-modal {
-    font-weight: 400 !important;
+  .scroll-modal {
+    max-height: 700px;
+    overflow-y: auto !important;
   }
 </style>

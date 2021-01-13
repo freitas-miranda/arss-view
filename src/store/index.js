@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import VuexReset from '@ianwalter/vuex-reset'
-import app from './app'
+import app from './app/'
 
 Vue.use(Vuex)
 

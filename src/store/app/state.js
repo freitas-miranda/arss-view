@@ -1,4 +1,11 @@
 export default {
+  email: localStorage.getItem('login:email') ? window.atob(localStorage.getItem('login:email')) : null,
+  nome: localStorage.getItem('login:nome') ? window.atob(localStorage.getItem('login:nome')) : null,
+  loading: false,
+  loadingAlterarSenha: false,
+  loadingLogin: false,
+  loadingLogout: false,
+  modalAlterarSenha: false,
   notificacao: {
     ativo: false,
     cor: null,
@@ -6,6 +13,5 @@ export default {
     mensagem: null,
     tempo: null
   },
-  titulo: '',
-  usuario: localStorage.getItem('arss:usuario') ? window.atob(localStorage.getItem('arss:usuario')) : ''
+  titulo: null
 }

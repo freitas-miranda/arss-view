@@ -6,6 +6,7 @@ const path = require('path')
 dotenv.config({ path: '.env' })
 
 app.listen(process.env.APP_PORT, function () {
+  // eslint-disable-next-line no-console
   console.log(`O Servidor esta executando na porta ${process.env.APP_PORT}!`)
 })
 

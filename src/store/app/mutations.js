@@ -1,4 +1,25 @@
 export default {
+  setEmail (state, valor) {
+    state.email = valor
+  },
+  setLoading (state, valor) {
+    state.loading = valor
+  },
+  setLoadingAlterarSenha (state, valor) {
+    state.loadingAlterarSenha = valor
+  },
+  setLoadingLogin (state, valor) {
+    state.loadingLogin = valor
+  },
+  setLoadingLogout (state, valor) {
+    state.loadingLogout = valor
+  },
+  setModalAlterarSenha (state, valor) {
+    state.modalAlterarSenha = valor
+  },
+  setNome (state, valor) {
+    state.nome = valor
+  },
   setNotificacao (state, { ativo, cor, icone, mensagem, tempo }) {
     state.notificacao = {
       ativo,
@@ -8,10 +29,7 @@ export default {
       tempo
     }
   },
-  setTitulo (state, valor) {
-    state.titulo = valor
-  },
-  setUsuario (state, valor) {
-    state.usuario = valor
+  setTitulo (state, titulo) {
+    state.titulo = titulo
   }
 }

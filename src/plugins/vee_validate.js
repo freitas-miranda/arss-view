@@ -1,9 +1,22 @@
 import { ValidationObserver, ValidationProvider, extend, localize, setInteractionMode } from 'vee-validate'
+import { confirmed, email, length, max, min, required } from 'vee-validate/dist/rules'
 import Vue from 'vue'
 import br from 'vee-validate/dist/locale/pt_BR'
-import { required } from 'vee-validate/dist/rules'
 
+extend('confirmed', confirmed)
+extend('email', email)
+extend('length', length)
+extend('max', max)
+extend('min', min)
 extend('required', required)
+extend('senha', {
+  validate: (valor) => {
+    let regex = /^(?=.*[A-Z])/
+
+    return regex.test(valor)
+  },
+  message: 'O campo {_field_} deve ter pelo menos uma letra maiúscula'
+})
 
 localize('pt_BR', br)
 

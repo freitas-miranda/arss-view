@@ -1,6 +1,6 @@
 module.exports = {
   apps: [{
-    name: 'arss',
+    name: 'login-view',
     script: './src/server/index.js',
     instances: 1,
     autorestart: true,

@@ -2,16 +2,24 @@ const dotenv = require('dotenv')
 const env = dotenv.config({ path: '.env' }).parsed
 
 process.env.VUE_APP_API_HOST = env.API_HOST
+process.env.VUE_APP_PORT = env.APP_PORT
 
 module.exports = {
-  transpileDependencies: ['vuetify'],
+  'transpileDependencies': [
+    '@ianwalter/vuex-reset',
+    'vuetify'
+  ],
   productionSourceMap: false,
   pwa: {
     name: 'ARSS',
-    themeColor: '#00613B',
-    msTileColor: '#00613B',
+    themeColor: '#18BCA6',
+    msTileColor: '#18BCA6',
     manifestOptions: {
-      background_color: '#00613B'
+      background_color: '#18BCA6'
     }
+  },
+  devServer: {
+    disableHostCheck: true,
+    port: env.APP_PORT
   }
 }

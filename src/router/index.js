@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import sistema from './sistema'
 import store from '@/store/'
 
 Vue.use(VueRouter)
@@ -64,6 +65,7 @@ const routes = [
     name: 'Confirmação de E-mail',
     component: () => import('@/views/confirmar_email')
   },
+  ...sistema,
   {
     path: '*',
     name: 'Página não encontrada',

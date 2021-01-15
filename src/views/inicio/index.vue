@@ -33,7 +33,7 @@ export default {
 
 <style lang="scss">
   .inicio {
-    background-color: #e6f9fd;
+    background-color: #e9f9fc;
     background-repeat: repeat;
   }
 </style>

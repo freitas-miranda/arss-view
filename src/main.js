@@ -1,6 +1,7 @@
 import '@/plugins/axios'
 import '@/plugins/crypto'
 import '@/plugins/dayjs'
+import '@/plugins/exibir_formulario'
 import '@/plugins/in_array'
 import '@/plugins/notificacao'
 import '@/plugins/registrar_modulo'

@@ -38,6 +38,15 @@
         </v-tab>
         <v-tab
           class="tab-menu"
+          to="/sistema/perfil"
+        >
+          <v-icon left>
+            mdi-card-account-details-outline
+          </v-icon>
+          Perfil Acesso
+        </v-tab>
+        <v-tab
+          class="tab-menu"
           to="/pacientes"
         >
           <v-icon left>

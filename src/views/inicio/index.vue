@@ -1,5 +1,6 @@
 <template>
   <v-container
+    class="inicio"
     fill-height
     fluid
   >
@@ -21,7 +22,7 @@
 
 <script>
 export default {
-  name: 'PGinaInCio',
+  name: 'PaginaInicio',
   data () {
     return {
       logo: require('@/assets/logo_inicio.png')
@@ -29,3 +30,10 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+  .inicio {
+    background-color: #e6f9fd;
+    background-repeat: repeat;
+  }
+</style>

@@ -29,6 +29,15 @@
         </v-tab>
         <v-tab
           class="tab-menu"
+          to="/sistema/usuario"
+        >
+          <v-icon left>
+            mdi-account-multiple
+          </v-icon>
+          Usuários
+        </v-tab>
+        <v-tab
+          class="tab-menu"
           to="/pacientes"
         >
           <v-icon left>
@@ -104,13 +113,13 @@
         </v-icon>
       </v-btn>
       <v-btn
-        to="/faturas"
+        to="/sistema/usuario"
         style="height: inherit !important;"
-        value="/faturas"
+        value="/sistema/usuario"
       >
-        Faturas
+        Usuários
         <v-icon>
-          mdi-file-chart-outline
+          mdi-account-multiple
         </v-icon>
       </v-btn>
       <v-btn

@@ -3,11 +3,10 @@
     class="container-404"
     fluid
     fill-height
-    pa-0
   >
     <v-row
       align="center"
-      no-gutters
+      justify="center"
     >
       <v-col
         class="d-flex justify-center"
@@ -15,10 +14,11 @@
       >
         <v-img
           :src="logo"
+          max-height="auto"
           class="ma-12"
-          height="90%"
+          height="70%"
           max-width="600px"
-          width="90%"
+          width="70%"
         />
       </v-col>
       <v-col

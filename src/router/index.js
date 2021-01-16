@@ -21,7 +21,8 @@ const routes = [
         name: 'Perfil',
         component: () => import('@/views/perfil'),
         props: { store: 'perfil' }
-      }
+      },
+      ...sistema
     ]
   },
   {
@@ -65,7 +66,6 @@ const routes = [
     name: 'Confirmação de E-mail',
     component: () => import('@/views/confirmar_email')
   },
-  ...sistema,
   {
     path: '*',
     name: 'Página não encontrada',

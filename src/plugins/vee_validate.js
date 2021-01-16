@@ -1,5 +1,5 @@
 import { ValidationObserver, ValidationProvider, extend, localize, setInteractionMode } from 'vee-validate'
-import { confirmed, email, length, max, min, required } from 'vee-validate/dist/rules'
+import { confirmed, email, length, max, min, numeric, required } from 'vee-validate/dist/rules'
 import Vue from 'vue'
 import br from 'vee-validate/dist/locale/pt_BR'
 
@@ -8,6 +8,7 @@ extend('email', email)
 extend('length', length)
 extend('max', max)
 extend('min', min)
+extend('numeric', numeric)
 extend('required', required)
 extend('senha', {
   validate: (valor) => {

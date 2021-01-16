@@ -5,7 +5,7 @@ export const apagar = async ({ commit }, id) => {
   try {
     commit('setLoading', true)
 
-    const res = await axios.delete('sistema/usuario/apagar/' + id)
+    const res = await axios.delete('controle-acesso/usuario/apagar/' + id)
 
     if (res.data.mensagem) {
       commit('setExibirFormulario', null)
@@ -21,7 +21,7 @@ export const dropdown = async ({ commit }) => {
   try {
     commit('setLoading', true)
 
-    const res = await axios.get('/sistema/perfil-acesso/dropdown')
+    const res = await axios.get('/controle-acesso/perfil-acesso/dropdown')
 
     if (!res.data.erro) {
       commit('setDropdownPerfis', res.data)
@@ -37,7 +37,7 @@ export const editar = async ({ commit }, dados) => {
   try {
     commit('setLoading', true)
 
-    const res = await axios.put('sistema/usuario/editar', dados)
+    const res = await axios.put('/controle-acesso/usuario/editar', dados)
 
     if (res.data.mensagem) {
       commit('setExibirFormulario', null)
@@ -53,7 +53,7 @@ export const exibir = async ({ commit }, id) => {
   try {
     commit('setLoading', true)
 
-    const res = await axios.get('sistema/usuario/exibir/' + id)
+    const res = await axios.get('/controle-acesso/usuario/exibir/' + id)
 
     if (!res.data.erro) {
       commit('setDadosExibir', res.data.registro)
@@ -70,7 +70,7 @@ export const listar = async ({ commit }, parametros) => {
   try {
     commit('setLoading', true)
 
-    const res = await axios.get('sistema/usuario/listar', {
+    const res = await axios.get('/controle-acesso/usuario/listar', {
       params: parametros
     })
 
@@ -88,7 +88,7 @@ export const redefinirSenha = async ({ commit }, dados) => {
   try {
     commit('setLoading', true)
 
-    const res = await axios.put('sistema/usuario/redefinir-senha', dados)
+    const res = await axios.put('/controle-acesso/usuario/redefinir-senha', dados)
 
     if (res.data.mensagem) commit('setExibirFormulario', null)
 
@@ -102,7 +102,7 @@ export const salvar = async ({ commit }, dados) => {
   try {
     commit('setLoading', true)
 
-    const res = await axios.post('sistema/usuario/salvar', dados)
+    const res = await axios.post('/controle-acesso/usuario/salvar', dados)
 
     if (res.data.mensagem) commit('setExibirFormulario', null)
 

@@ -227,4 +227,5 @@ export default {
     top: auto !important;
     z-index: 1 !important;
   }
+
 </style>

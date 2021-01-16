@@ -17,8 +17,8 @@
       :titulo-formulario="titulo"
       campos-obrigatorios
       excluir
-      subtitulo="Cadastro de perfil de usuário"
-      titulo="Perfil"
+      subtitulo="Manutenção dos perfis de acesso para usuários"
+      titulo="Perfil de Acesso"
       @confirmar="$refs.formulario.confirmar()"
       @editar="setExibirFormulario($exibirFormulario.editar)"
       @excluir="apagar(dadosExibir.id)"

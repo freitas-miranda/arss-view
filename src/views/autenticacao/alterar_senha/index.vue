@@ -72,7 +72,7 @@
             <v-btn
               :loading="loading"
               block
-              color="primary"
+              color="secondary"
               large
               @click="confirmar()"
             >
@@ -93,7 +93,7 @@
             <v-btn
               :loading="loading"
               block
-              color="primary"
+              color="secondary"
               large
               @click="$router.push('/login')"
             >

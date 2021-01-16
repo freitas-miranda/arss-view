@@ -18,7 +18,7 @@
           <v-col cols="5">
             <v-card
               class="card-autenticacao-portal"
-              color="primary"
+              color="secondary"
               dark
               flat
             >

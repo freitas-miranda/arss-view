@@ -1,99 +1,160 @@
 <template>
-  <pagina
-    :adicionar="exibirFormulario === $exibirFormulario.adicionar"
-    :editar="exibirFormulario === $exibirFormulario.editar"
-    :exibir="exibirFormulario === $exibirFormulario.exibir"
-    :loading="loading"
-    :mais-opcoes="exibirFormulario === $exibirFormulario.editar"
-    :titulo-formulario="titulo"
-    campos-obrigatorios
-    excluir
-    subtitulo="Cadastro de usuários do sistema"
-    titulo="Usuário"
-    @confirmar="$refs.formulario.confirmar()"
-    @editar="setExibirFormulario($exibirFormulario.editar)"
-    @excluir="apagar(dadosExibir.id)"
-    @fechar="setExibirFormulario(null)"
+  <v-col
+    cols="12"
+    xs="12"
+    sm="11"
+    md="10"
+    lg="9"
+    xl="6"
+    offset-lg="1"
   >
-    <filtro
-      v-if="!exibirFormulario"
+    <pagina
+      :adicionar="exibirFormulario === $exibirFormulario.adicionar"
+      :editar="exibirFormulario === $exibirFormulario.editar"
+      :exibir="exibirFormulario === $exibirFormulario.exibir"
       :loading="loading"
-      adicionar
-      pesquisar
-      @adicionar="setExibirFormulario($exibirFormulario.adicionar)"
-      @pesquisar="listagem()"
+      :mais-opcoes="exibirFormulario === $exibirFormulario.editar"
+      :titulo-formulario="titulo"
+      campos-obrigatorios
+      excluir
+      subtitulo="Manutenção dos usuários do sistema"
+      titulo="Usuário"
+      @confirmar="$refs.formulario.confirmar()"
+      @editar="setExibirFormulario($exibirFormulario.editar)"
+      @excluir="apagar(dadosExibir.id)"
+      @fechar="setExibirFormulario(null)"
     >
-      <validation-observer
-        ref="form"
-        autocomplete="off"
-        tag="form"
+      <filtro
+        v-if="!exibirFormulario"
+        :loading="loading"
+        adicionar
+        pesquisar
+        @adicionar="setExibirFormulario($exibirFormulario.adicionar)"
+        @pesquisar="listagem()"
       >
-        <v-row dense>
-          <v-col
-            sm="4"
-            cols="12"
-          >
-            <v-text-field
-              v-model="login"
-              v-uppercase
-              autofocus
-              filled
-              hide-details
-              label="Login"
-              @click:append="listagem()"
-              @keyup.enter="listagem()"
-            />
-          </v-col>
-          <v-col
-            lg="2"
-            sm="2"
-            cols="12"
-          >
-            <v-autocomplete
-              v-model="ativo"
-              :items="dropdownAtivo"
-              filled
-              hide-details
-              item-text="descricao"
-              item-value="codigo"
-              label="Ativo"
-              @input="listagem()"
-            />
-          </v-col>
-        </v-row>
-      </validation-observer>
-    </filtro>
+        <validation-observer
+          ref="form"
+          autocomplete="off"
+          tag="form"
+        >
+          <v-row dense>
+            <v-col
+              sm="2"
+              cols="12"
+            >
+              <validation-provider
+                v-slot="{ errors }"
+                name="Código"
+                rules="numeric"
+                vid="codigo"
+              >
+                <v-text-field
+                  v-model="codigo"
+                  :error-messages="errors"
+                  :hide-details="erroValidacao(errors)"
+                  autofocus
+                  filled
+                  label="Código"
+                  @click:append="listagem()"
+                  @keyup.enter="listagem()"
+                />
+              </validation-provider>
+            </v-col>
+            <v-col
+              sm="3"
+              cols="12"
+            >
+              <v-text-field
+                v-model="nome"
+                v-uppercase
+                autofocus
+                filled
+                hide-details
+                label="Nome"
+                @click:append="listagem()"
+                @keyup.enter="listagem()"
+              />
+            </v-col>
+            <v-col
+              sm="3"
+              cols="12"
+            >
+              <v-text-field
+                v-model="email"
+                v-uppercase
+                autofocus
+                filled
+                hide-details
+                label="E-mail"
+                @click:append="listagem()"
+                @keyup.enter="listagem()"
+              />
+            </v-col>
+            <v-col
+              sm="2"
+              cols="12"
+            >
+              <v-text-field
+                v-model="perfil"
+                v-uppercase
+                autofocus
+                filled
+                hide-details
+                label="Perfil"
+                @click:append="listagem()"
+                @keyup.enter="listagem()"
+              />
+            </v-col>
+            <v-col
+              lg="2"
+              sm="2"
+              cols="12"
+            >
+              <v-autocomplete
+                v-model="ativo"
+                :items="dropdownAtivo"
+                filled
+                hide-details
+                item-text="descricao"
+                item-value="codigo"
+                label="Ativo"
+                @input="listagem()"
+              />
+            </v-col>
+          </v-row>
+        </validation-observer>
+      </filtro>
 
-    <template v-slot:mais-opcoes>
-      <v-list-item @click="redefinirSenhaUsuario()">
-        <v-list-item-icon class="mr-3">
-          <v-icon color="primary">
-            mdi-key-outline
-          </v-icon>
-        </v-list-item-icon>
-        <v-list-item-content>
-          <v-list-item-title>
-            Redefinir Senha
-          </v-list-item-title>
-        </v-list-item-content>
-      </v-list-item>
-    </template>
+      <template v-slot:mais-opcoes>
+        <v-list-item @click="redefinirSenhaUsuario()">
+          <v-list-item-icon class="mr-3">
+            <v-icon color="primary">
+              mdi-key-outline
+            </v-icon>
+          </v-list-item-icon>
+          <v-list-item-content>
+            <v-list-item-title>
+              Redefinir Senha
+            </v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+      </template>
 
-    <tabela
-      v-if="!exibirFormulario"
-      :colunas="colunas"
-      :loading="loading"
-      :registros="registros"
-      exibir
-      @excel="exportarExcel()"
-      @exibir="exibir($event)"
-    />
+      <tabela
+        v-if="!exibirFormulario"
+        :colunas="colunas"
+        :registros="registros"
+        exibir
+        @excel="exportarExcel()"
+        @exibir="exibir($event)"
+      />
 
-    <formulario
-      v-else
-      ref="formulario"
-    />
-  </pagina>
+      <formulario
+        v-else
+        ref="formulario"
+      />
+    </pagina>
+  </v-col>
 </template>
 
 <script>
@@ -107,6 +168,7 @@ export default {
   data () {
     return {
       ativo: null,
+      codigo: null,
       colunas: [
         {
           align: 'center',
@@ -123,17 +185,32 @@ export default {
         },
         {
           align: 'start',
-          text: 'Login',
-          value: 'login',
-          width: '80%'
+          text: 'Nome',
+          value: 'nome',
+          width: '30%'
         },
         {
           align: 'start',
+          text: 'E-mail',
+          value: 'email',
+          width: '30%'
+        },
+        {
+          align: 'start',
+          text: 'Perfil de Acesso',
+          value: 'perfil',
+          width: '15%'
+        },
+        {
+          align: 'end',
           text: 'Ativo',
           value: 'ativo',
-          width: '15%'
+          width: '10%'
         }
       ],
+      email: null,
+      nome: null,
+      perfil: null,
       dropdownAtivo: [
         {
           codigo: 1,
@@ -143,8 +220,7 @@ export default {
           codigo: 0,
           descricao: 'NÃO'
         }
-      ],
-      login: null
+      ]
     }
   },
   computed: {
@@ -204,7 +280,10 @@ export default {
       if (await this.$refs.form.validate()) {
         this.listar({
           ativo: this.ativo !== null ? this.ativo : undefined,
-          login: this.login || undefined
+          codigo: this.codigo || undefined,
+          email: this.email || undefined,
+          nome: this.nome || undefined,
+          perfil: this.perfil || undefined
         })
       }
     },

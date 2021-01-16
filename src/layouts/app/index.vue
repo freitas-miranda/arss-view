@@ -93,7 +93,7 @@
         <v-list class="list-opcoes-usuario">
           <v-list-item @click="sairSistema()">
             <v-list-item-icon>
-              <v-icon color="primary">
+              <v-icon color="secondary">
                 mdi-logout-variant
               </v-icon>
             </v-list-item-icon>
@@ -108,7 +108,7 @@
       v-if="$vuetify.breakpoint.width < 700"
       :value="navegacaoRodape"
       app
-      color="primary"
+      color="secondary"
       grow
     >
       <v-btn
@@ -228,4 +228,5 @@ export default {
   .v-main__wrap {
     background-color: #f0f0f0;
   }
+
 </style>

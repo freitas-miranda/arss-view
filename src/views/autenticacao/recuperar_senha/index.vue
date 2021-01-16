@@ -8,7 +8,7 @@
         </div>
         <v-spacer />
         <v-btn
-          color="primary"
+          color="secondary"
           @click="redirecionarCadastro()"
         >
           <v-icon left>
@@ -66,7 +66,7 @@
             <v-btn
               :loading="loading"
               block
-              color="primary"
+              color="secondary"
               large
               @click="recuperar()"
             >
@@ -87,7 +87,7 @@
             <v-btn
               :loading="loading"
               block
-              color="primary"
+              color="secondary"
               large
               @click="$router.push('/login')"
             >

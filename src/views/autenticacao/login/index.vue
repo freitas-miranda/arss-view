@@ -20,7 +20,7 @@
           >
             <v-btn
               class="mr-1"
-              color="primary"
+              color="secondary"
               @click="redirecionarCadastro()"
             >
               <v-icon left>
@@ -104,7 +104,7 @@
             <v-btn
               :loading="loadingLogin"
               block
-              color="primary"
+              color="secondary"
               large
               @click="efetuarLogin()"
             >
@@ -125,7 +125,7 @@
             <v-btn
               :loading="loadingLogin"
               block
-              color="primary"
+              color="secondary"
               large
               @click="$router.push('/cadastrar')"
             >

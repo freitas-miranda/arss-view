@@ -55,7 +55,7 @@
             <v-btn
               :loading="loading"
               block
-              color="primary"
+              color="secondary"
               large
               @click="criarConta()"
             >
@@ -76,7 +76,7 @@
             <v-btn
               :loading="loading"
               block
-              color="primary"
+              color="secondary"
               large
               @click="$router.push('/login')"
             >

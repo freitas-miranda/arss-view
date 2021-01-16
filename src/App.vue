@@ -54,7 +54,7 @@ export default {
   }
 
   ::-webkit-scrollbar-thumb {
-    background-color: #00796B;
+    background-color: #5ca8c3;
   }
 
   .required {

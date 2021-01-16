@@ -66,7 +66,7 @@ export default {
 
 <style lang="scss">
   .toolbar-modal {
-    background: linear-gradient(90deg, rgba(0,121,107,1) 0%, rgb(21, 146, 129) 100%) !important;
+    background: linear-gradient(90deg, rgb(102, 172, 183) 0%, rgb(14, 148, 192) 100%) !important;
   }
 
   .scroll-modal {

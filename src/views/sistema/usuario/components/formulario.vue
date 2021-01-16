@@ -6,17 +6,30 @@
   >
     <v-row dense>
       <v-col
-        :sm="exibirFormulario === $exibirFormulario.adicionar ? 3 : 5"
+        v-if="exibirFormulario !== $exibirFormulario.adicionar"
+        sm="2"
+        cols="12"
+      >
+        <v-text-field
+          v-model="dadosExibir.id"
+          disabled
+          hide-details
+          filled
+          label="Código"
+        />
+      </v-col>
+      <v-col
+        sm="3"
         cols="12"
       >
         <validation-provider
           v-slot="{ errors }"
-          name="Login"
+          name="Nome"
           rules="required"
-          vid="login"
+          vid="nome"
         >
           <v-text-field
-            v-model="login"
+            v-model="nome"
             v-uppercase
             :disabled="exibirFormulario === $exibirFormulario.exibir"
             :error-messages="errors"
@@ -24,12 +37,59 @@
             autofocus
             class="required"
             filled
-            label="Login"
+            label="Nome"
           />
         </validation-provider>
       </v-col>
       <v-col
-        :sm="exibirFormulario === $exibirFormulario.adicionar ? 3 : 5"
+        sm="3"
+        cols="12"
+      >
+        <validation-provider
+          v-slot="{ errors }"
+          name="E-mail"
+          rules="required"
+          vid="email"
+        >
+          <v-text-field
+            v-model="email"
+            v-uppercase
+            :disabled="exibirFormulario === $exibirFormulario.exibir"
+            :error-messages="errors"
+            :hide-details="erroValidacao(errors)"
+            autofocus
+            class="required"
+            filled
+            label="E-mail"
+          />
+        </validation-provider>
+      </v-col>
+      <v-col
+        v-if="exibirFormulario === $exibirFormulario.adicionar"
+        sm="2"
+        cols="12"
+      >
+        <validation-provider
+          v-slot="{ errors }"
+          name="Senha"
+          rules="required"
+          vid="senha"
+        >
+          <v-text-field
+            v-model="senha"
+            v-uppercase
+            :disabled="exibirFormulario === $exibirFormulario.exibir"
+            :error-messages="errors"
+            :hide-details="erroValidacao(errors)"
+            class="required"
+            filled
+            label="Senha"
+            type="password"
+          />
+        </validation-provider>
+      </v-col>
+      <v-col
+        sm="2"
         cols="12"
       >
         <validation-provider
@@ -49,30 +109,6 @@
             item-text="descricao"
             item-value="id"
             label="Perfil"
-          />
-        </validation-provider>
-      </v-col>
-      <v-col
-        v-if="exibirFormulario === $exibirFormulario.adicionar"
-        sm="4"
-        cols="12"
-      >
-        <validation-provider
-          v-slot="{ errors }"
-          name="Senha"
-          rules="required"
-          vid="senha"
-        >
-          <v-text-field
-            v-model="senha"
-            v-uppercase
-            :disabled="exibirFormulario === $exibirFormulario.exibir"
-            :error-messages="errors"
-            :hide-details="erroValidacao(errors)"
-            class="required"
-            filled
-            label="Senha"
-            type="password"
           />
         </validation-provider>
       </v-col>
@@ -112,6 +148,7 @@ export default {
   data () {
     return {
       ativo: null,
+      codigo: null,
       dropdownAtivo: [
         {
           codigo: 1,
@@ -122,7 +159,8 @@ export default {
           descricao: 'NÃO'
         }
       ],
-      login: null,
+      email: null,
+      nome: null,
       perfil: null,
       senha: null
     }
@@ -136,9 +174,10 @@ export default {
   },
   created () {
     if (this.exibirFormulario === this.$exibirFormulario.exibir) {
+      this.nome = this.dadosExibir.nome
+      this.email = this.dadosExibir.email
+      this.perfil = this.dadosExibir.perfilAcessoId
       this.ativo = this.dadosExibir.ativo
-      this.login = this.dadosExibir.login
-      this.perfil = this.dadosExibir.perfilId
     }
   },
   methods: {
@@ -150,17 +189,19 @@ export default {
       if (await this.$refs.form.validate()) {
         if (this.exibirFormulario === this.$exibirFormulario.adicionar) {
           this.salvar({
-            ativo: this.ativo,
-            login: this.login,
-            perfilId: this.perfil,
-            senha: this.$crypto(this.senha)
+            nome: this.nome,
+            email: this.email,
+            senha: this.$crypto(this.senha),
+            perfilAcessoId: this.perfil,
+            ativo: this.ativo
           })
         } else {
           this.editar({
             id: this.dadosExibir.id,
-            ativo: this.ativo,
-            login: this.login,
-            perfilId: this.perfil
+            nome: this.nome,
+            email: this.email,
+            perfilAcessoId: this.perfil,
+            ativo: this.ativo
           })
         }
       }

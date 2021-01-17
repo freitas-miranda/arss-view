@@ -1,3 +1,4 @@
+import { cpf } from '@/plugins/cpf'
 import dayjs from '@/plugins/dayjs'
 
 export default {
@@ -20,11 +21,9 @@ export default {
   setRegistros (state, dados) {
     dados.forEach(item => {
       item.dataNascimento = item.dataNascimento ? dayjs(item.dataNascimento, 'YYYY-MM-DD').format('DD/MM/YYYY') : item.dataNascimento
+      item.cpf = cpf.format(item.cpf)
     })
 
     state.registros = dados
-  },
-  setImplantacao (state, dados) {
-    state.implantacao = dados
   }
 }

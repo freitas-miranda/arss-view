@@ -15,12 +15,15 @@ import App from './App.vue'
 import Vue from 'vue'
 import VueClipboard from 'vue-clipboard2'
 import VueMeta from 'vue-meta'
+import { cpf } from './plugins/cpf'
 import { facade } from 'vue-input-facade'
 import { mask } from 'vue-the-mask'
 import router from './router'
 import store from './store'
 import uppercase from './plugins/uppercase'
 import vuetify from './plugins/vuetify'
+
+Vue.prototype.$cpf = cpf
 
 Vue.config.productionTip = false
 

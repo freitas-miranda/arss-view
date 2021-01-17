@@ -245,17 +245,12 @@ export default {
       'editar',
       'salvar'
     ]),
-    stripCpf (number) {
-      const STRICT_STRIP_REGEX = /[.-]/g
-      const regex = STRICT_STRIP_REGEX
-      return (number || '').toString().replace(regex, '')
-    },
     async confirmar () {
       if (await this.$refs.form.validate()) {
         if (this.exibirFormulario === this.$exibirFormulario.adicionar) {
           this.salvar({
             pessoaId: this.dadosExibir.id,
-            cpf: this.stripCpf(this.cpf),
+            cpf: this.$cpf.strip(this.cpf),
             nome: this.nome,
             cartaoSus: this.cartaoSus,
             dataNascimento: this.dataNascimento ? this.$day(this.dataNascimento, 'DD/MM/YYYY').format('YYYY-MM-DD') : null,
@@ -268,7 +263,7 @@ export default {
           this.editar({
             id: this.dadosExibir.id,
             pessoaId: this.dadosExibir.id,
-            cpf: this.stripCpf(this.cpf),
+            cpf: this.$cpf.strip(this.cpf),
             nome: this.nome,
             cartaoSus: this.cartaoSus,
             dataNascimento: this.dataNascimento ? this.$day(this.dataNascimento, 'DD/MM/YYYY').format('YYYY-MM-DD') : null,

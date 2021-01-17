@@ -122,7 +122,7 @@
             class="required"
             filled
             item-text="descricao"
-            item-value="id"
+            item-value="codigo"
             label="Sexo"
           />
         </validation-provider>
@@ -194,7 +194,7 @@
           filled
           hide-details
           item-text="descricao"
-          item-value="id"
+          item-value="codigo"
           label="Tipo Sanguíneo"
         />
       </v-col>

@@ -11,6 +11,7 @@
         draggable="false"
         height="auto"
         width="50"
+        @click="voltarParaPaginaInicial()"
       >
       <v-tabs
         v-if="$vuetify.breakpoint.width >= 700"
@@ -18,15 +19,6 @@
         color="white"
         optional
       >
-        <v-tab
-          class="tab-menu"
-          to="/"
-        >
-          <v-icon left>
-            mdi-home-circle-outline
-          </v-icon>
-          Início
-        </v-tab>
         <v-tab
           class="tab-menu"
           to="/sistema/usuario"
@@ -43,11 +35,11 @@
           <v-icon left>
             mdi-card-account-details-outline
           </v-icon>
-          Perfil Acesso
+          Perfil
         </v-tab>
         <v-tab
           class="tab-menu"
-          to="/pacientes"
+          to="/paciente"
         >
           <v-icon left>
             mdi-account-outline
@@ -111,16 +103,6 @@
       color="secondary"
       grow
     >
-      <v-btn
-        to="/"
-        style="height: inherit !important;"
-        value="/"
-      >
-        Início
-        <v-icon>
-          mdi-home-circle-outline
-        </v-icon>
-      </v-btn>
       <v-btn
         to="/sistema/usuario"
         style="height: inherit !important;"
@@ -189,6 +171,9 @@ export default {
       const sair = await this.logout()
 
       if (sair.mensagem) this.$router.push('/login')
+    },
+    voltarParaPaginaInicial () {
+      this.$router.push('/').catch(() => {})
     }
   }
 }

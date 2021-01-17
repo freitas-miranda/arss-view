@@ -1,13 +1,5 @@
 <template>
-  <v-col
-    cols="12"
-    xs="12"
-    sm="11"
-    md="9"
-    lg="7"
-    xl="5"
-    offset-lg="1"
-  >
+  <v-col>
     <pagina
       :adicionar="exibirFormulario === $exibirFormulario.adicionar"
       :editar="exibirFormulario === $exibirFormulario.editar"
@@ -17,8 +9,8 @@
       :titulo-formulario="titulo"
       campos-obrigatorios
       excluir
-      subtitulo="Manutenção dos perfis de acesso para usuários"
-      titulo="Perfil de Acesso"
+      subtitulo="Manutenção dos pacientes"
+      titulo="Pacientes"
       @confirmar="$refs.formulario.confirmar()"
       @editar="setExibirFormulario($exibirFormulario.editar)"
       @excluir="apagar(dadosExibir.id)"
@@ -52,7 +44,6 @@
                   v-model="codigo"
                   :error-messages="errors"
                   :hide-details="erroValidacao(errors)"
-                  autofocus
                   filled
                   label="Código"
                   @click:append="listagem()"
@@ -61,15 +52,37 @@
               </validation-provider>
             </v-col>
             <v-col
-              sm="10"
+              sm="3"
+              cols="12"
+            >
+              <validation-provider
+                v-slot="{ errors }"
+                name="CPF"
+                rules="numeric"
+                vid="cpf"
+              >
+                <v-text-field
+                  v-model="cpf"
+                  :error-messages="errors"
+                  :hide-details="erroValidacao(errors)"
+                  filled
+                  label="CPF"
+                  @click:append="listagem()"
+                  @keyup.enter="listagem()"
+                />
+              </validation-provider>
+            </v-col>
+            <v-col
+              sm="7"
               cols="12"
             >
               <v-text-field
-                v-model="descricao"
+                v-model="nome"
                 v-uppercase
+                autofocus
                 filled
                 hide-details
-                label="Descrição"
+                label="Nome"
                 @click:append="listagem()"
                 @keyup.enter="listagem()"
               />
@@ -99,7 +112,7 @@
 import { mapActions, mapMutations, mapState } from 'vuex'
 
 export default {
-  name: 'PaginaSistemaPerfil',
+  name: 'PaginaPaciente',
   components: {
     formulario: () => import('./components/formulario')
   },
@@ -122,16 +135,23 @@ export default {
         },
         {
           align: 'start',
-          text: 'Descrição',
-          value: 'descricao',
-          width: '95%'
+          text: 'CPF',
+          value: 'cpf',
+          width: '30%'
+        },
+        {
+          align: 'start',
+          text: 'Nome',
+          value: 'nome',
+          width: '63%'
         }
       ],
-      descricao: null
+      cpf: null,
+      nome: null
     }
   },
   computed: {
-    ...mapState('sistemaPerfil', [
+    ...mapState('paciente', [
       'dadosExibir',
       'exibirFormulario',
       'loading',
@@ -152,7 +172,7 @@ export default {
           break
       }
 
-      return `${titulo} Perfil`
+      return `${titulo} Paciente`
     }
   },
   watch: {
@@ -168,23 +188,26 @@ export default {
   created () {
     setTimeout(() => {
       this.listagem()
+      this.dropdown()
     }, 300)
   },
   methods: {
-    ...mapActions('sistemaPerfil', [
+    ...mapActions('paciente', [
       'apagar',
+      'dropdown',
       'exibir',
       'listar'
     ]),
-    ...mapMutations('sistemaPerfil', [
+    ...mapMutations('paciente', [
       'setDadosExibir',
       'setExibirFormulario'
     ]),
     async listagem () {
       if (await this.$refs.form.validate()) {
         this.listar({
-          id: this.codigo || undefined,
-          descricao: this.descricao || undefined
+          codigo: this.codigo || undefined,
+          cpf: this.cpf || undefined,
+          nome: this.nome || undefined
         })
       }
     },

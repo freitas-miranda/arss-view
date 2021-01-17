@@ -20,7 +20,6 @@
           :value="value"
           append-icon="mdi-calendar-month-outline"
           autocomplete="off"
-          clearable
           filled
           persistent-hint
           v-on="!readonly ? on : ''"

@@ -15,6 +15,7 @@ import App from './App.vue'
 import Vue from 'vue'
 import VueClipboard from 'vue-clipboard2'
 import VueMeta from 'vue-meta'
+import { facade } from 'vue-input-facade'
 import { mask } from 'vue-the-mask'
 import router from './router'
 import store from './store'
@@ -37,6 +38,7 @@ Vue.component('tabela', () => import('./components/tabela'))
 Vue.component('totais', () => import('./components/totais'))
 
 Vue.directive('mask', mask)
+Vue.directive('facade', facade)
 Vue.directive('uppercase', uppercase)
 
 Vue.mixin({

@@ -21,7 +21,7 @@ Axios.interceptors.response.use((response) => {
   return response
 }, (error) => {
   if (!error.response) {
-    Vue.prototype.$notificacao('Erro ao processar requisição. Tente sss novamente!', 'erro')
+    Vue.prototype.$notificacao('Erro ao processar requisição. Tente novamente!', 'erro')
   } else if (error.response.status === 401) {
     localStorage.removeItem('login:token')
     localStorage.removeItem('login:nome')
@@ -34,7 +34,7 @@ Axios.interceptors.response.use((response) => {
   } else if (error.response.status === 404) {
     Vue.prototype.$notificacao('Requisição não encontrada!', 'erro')
   } else if (error.response.status === 500) {
-    Vue.prototype.$notificacao(error.response.data.erro || 'Erro ao processar requisição. Tente sss novamente!', 'erro')
+    Vue.prototype.$notificacao(error.response.data.erro || 'Erro ao processar requisição. Tente novamente!', 'erro')
   }
 
   return Promise.reject(error)

@@ -99,7 +99,7 @@
             @click="$emit('confirmar')"
           >
             <v-icon left>
-              mdi-content-save
+              mdi-check
             </v-icon>
             Confirmar
           </v-btn>
@@ -117,6 +117,7 @@
             Editar
           </v-btn>
           <v-btn
+            v-if="adicionar || editar"
             :loading="loading"
             color="error"
             small
@@ -124,9 +125,22 @@
             @click="$emit('fechar')"
           >
             <v-icon left>
-              mdi-close-circle-outline
+              mdi-window-close
             </v-icon>
             Cancelar
+          </v-btn>
+          <v-btn
+            v-if="exibir"
+            :loading="loading"
+            color="error"
+            small
+            title="Voltar"
+            @click="$emit('fechar')"
+          >
+            <v-icon left>
+              mdi-reply
+            </v-icon>
+            Voltar
           </v-btn>
           <v-spacer />
           <span

@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import sistema from './sistema'
 import store from '@/store/'
 
 Vue.use(VueRouter)
@@ -17,12 +16,29 @@ const routes = [
         path: ''
       },
       {
+        component: () => import('@/views/perfil'),
         path: 'perfil',
         name: 'Perfil',
-        component: () => import('@/views/perfil'),
         props: { store: 'perfil' }
       },
-      ...sistema
+      {
+        component: () => import('@/views/sistema/perfil'),
+        name: 'PerfilAcesso',
+        path: '/sistema/perfil',
+        props: { store: 'sistemaPerfil' }
+      },
+      {
+        component: () => import('@/views/sistema/usuario'),
+        name: 'Usuários',
+        path: '/sistema/usuario',
+        props: { store: 'sistemaUsuario' }
+      },
+      {
+        component: () => import('@/views/paciente'),
+        name: 'Paciente',
+        path: '/paciente',
+        props: { store: 'paciente' }
+      }
     ]
   },
   {

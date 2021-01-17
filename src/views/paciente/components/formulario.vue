@@ -131,21 +131,6 @@
         sm="2"
         cols="12"
       >
-        <v-autocomplete
-          v-model="tipoSanguineo"
-          :disabled="exibirFormulario === $exibirFormulario.exibir"
-          :items="dropdownTipoSanguineo"
-          filled
-          hide-details
-          item-text="descricao"
-          item-value="id"
-          label="Tipo Sanguíneo"
-        />
-      </v-col>
-      <v-col
-        sm="2"
-        cols="12"
-      >
         <validation-provider
           v-slot="{ errors }"
           name="Peso"
@@ -197,6 +182,21 @@
             <span>Altura em metros</span>
           </v-tooltip>
         </validation-provider>
+      </v-col>
+      <v-col
+        sm="2"
+        cols="12"
+      >
+        <v-autocomplete
+          v-model="tipoSanguineo"
+          :disabled="exibirFormulario === $exibirFormulario.exibir"
+          :items="dropdownTipoSanguineo"
+          filled
+          hide-details
+          item-text="descricao"
+          item-value="id"
+          label="Tipo Sanguíneo"
+        />
       </v-col>
     </v-row>
   </validation-observer>

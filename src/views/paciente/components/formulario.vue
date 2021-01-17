@@ -161,6 +161,7 @@
                 :hide-details="erroValidacao(errors)"
                 filled
                 label="Peso (kg)"
+                type="number"
                 v-bind="attrs"
                 v-on="on"
               />
@@ -187,12 +188,13 @@
                 :error-messages="errors"
                 :hide-details="erroValidacao(errors)"
                 filled
-                label="Altura (cm)"
+                label="Altura (m)"
+                type="number"
                 v-bind="attrs"
                 v-on="on"
               />
             </template>
-            <span>Altura em centímetros</span>
+            <span>Altura em metros</span>
           </v-tooltip>
         </validation-provider>
       </v-col>
@@ -202,7 +204,6 @@
 
 <script>
 import { mapActions, mapState } from 'vuex'
-import { stripModeda } from '@plugins/moeda'
 
 export default {
   name: 'ComponentePacienteFormulario',
@@ -260,8 +261,8 @@ export default {
             dataNascimento: this.dataNascimento ? this.$day(this.dataNascimento, 'DD/MM/YYYY').format('YYYY-MM-DD') : null,
             sexo: this.sexo,
             tipoSanguineo: this.tipoSanguineo,
-            peso: stripModeda(this.peso),
-            altura: stripModeda(this.altura)
+            peso: this.peso,
+            altura: this.altura
           })
         } else {
           this.editar({
@@ -273,8 +274,8 @@ export default {
             dataNascimento: this.dataNascimento ? this.$day(this.dataNascimento, 'DD/MM/YYYY').format('YYYY-MM-DD') : null,
             sexo: this.sexo,
             tipoSanguineo: this.tipoSanguineo,
-            peso: stripModeda(this.peso),
-            altura: stripModeda(this.altura)
+            peso: this.peso,
+            altura: this.altura
           })
         }
       }

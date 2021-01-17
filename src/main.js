@@ -17,6 +17,7 @@ import VueClipboard from 'vue-clipboard2'
 import VueMeta from 'vue-meta'
 import { cpf } from './plugins/cpf'
 import { facade } from 'vue-input-facade'
+import { fdate } from './plugins/fdate'
 import { mask } from 'vue-the-mask'
 import router from './router'
 import store from './store'
@@ -24,6 +25,7 @@ import uppercase from './plugins/uppercase'
 import vuetify from './plugins/vuetify'
 
 Vue.prototype.$cpf = cpf
+Vue.prototype.$fdate = fdate
 
 Vue.config.productionTip = false
 

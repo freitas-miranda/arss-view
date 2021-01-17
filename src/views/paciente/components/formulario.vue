@@ -247,30 +247,23 @@ export default {
     ]),
     async confirmar () {
       if (await this.$refs.form.validate()) {
+        const dados = {
+          pessoaId: this.dadosExibir.id,
+          cpf: this.$cpf.strip(this.cpf),
+          nome: this.nome,
+          cartaoSus: this.cartaoSus,
+          dataNascimento: this.$fdate.toSql(this.dataNascimento),
+          sexo: this.sexo,
+          tipoSanguineo: this.tipoSanguineo,
+          peso: this.peso,
+          altura: this.altura
+        }
         if (this.exibirFormulario === this.$exibirFormulario.adicionar) {
-          this.salvar({
-            pessoaId: this.dadosExibir.id,
-            cpf: this.$cpf.strip(this.cpf),
-            nome: this.nome,
-            cartaoSus: this.cartaoSus,
-            dataNascimento: this.dataNascimento ? this.$day(this.dataNascimento, 'DD/MM/YYYY').format('YYYY-MM-DD') : null,
-            sexo: this.sexo,
-            tipoSanguineo: this.tipoSanguineo,
-            peso: this.peso,
-            altura: this.altura
-          })
+          this.salvar(dados)
         } else {
           this.editar({
             id: this.dadosExibir.id,
-            pessoaId: this.dadosExibir.id,
-            cpf: this.$cpf.strip(this.cpf),
-            nome: this.nome,
-            cartaoSus: this.cartaoSus,
-            dataNascimento: this.dataNascimento ? this.$day(this.dataNascimento, 'DD/MM/YYYY').format('YYYY-MM-DD') : null,
-            sexo: this.sexo,
-            tipoSanguineo: this.tipoSanguineo,
-            peso: this.peso,
-            altura: this.altura
+            ...dados
           })
         }
       }

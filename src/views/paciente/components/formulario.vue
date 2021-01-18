@@ -225,7 +225,7 @@
       >
         <v-autocomplete
           v-model="telefoneTipo"
-          :disabled="exibirFormulario === $exibirFormulario.exibir"
+          :disabled="!telefoneNumero || exibirFormulario === $exibirFormulario.exibir"
           :items="dropdownTipoTelefone"
           filled
           hide-details

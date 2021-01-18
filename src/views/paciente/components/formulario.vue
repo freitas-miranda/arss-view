@@ -19,6 +19,28 @@
         />
       </v-col>
       <v-col
+        :sm="exibirFormulario !== $exibirFormulario.adicionar ? 5 : 7"
+        cols="12"
+      >
+        <validation-provider
+          v-slot="{ errors }"
+          name="Nome"
+          rules="required"
+          vid="nome"
+        >
+          <v-text-field
+            v-model="nome"
+            v-uppercase
+            :disabled="exibirFormulario === $exibirFormulario.exibir"
+            :error-messages="errors"
+            :hide-details="erroValidacao(errors)"
+            class="required"
+            filled
+            label="Nome"
+          />
+        </validation-provider>
+      </v-col>
+      <v-col
         sm="3"
         cols="12"
       >
@@ -38,28 +60,6 @@
             class="required"
             filled
             label="CPF"
-          />
-        </validation-provider>
-      </v-col>
-      <v-col
-        :sm="exibirFormulario !== $exibirFormulario.adicionar ? 5 : 7"
-        cols="12"
-      >
-        <validation-provider
-          v-slot="{ errors }"
-          name="Nome"
-          rules="required"
-          vid="nome"
-        >
-          <v-text-field
-            v-model="nome"
-            v-uppercase
-            :disabled="exibirFormulario === $exibirFormulario.exibir"
-            :error-messages="errors"
-            :hide-details="erroValidacao(errors)"
-            class="required"
-            filled
-            label="Nome"
           />
         </validation-provider>
       </v-col>
@@ -198,6 +198,42 @@
           label="Tipo Sanguíneo"
         />
       </v-col>
+      <v-col
+        sm="3"
+        cols="12"
+      >
+        <validation-provider
+          v-slot="{ errors }"
+          name="Telefone"
+          rules="min:14"
+          vid="telefoneNumero"
+        >
+          <v-text-field
+            v-model="telefoneNumero"
+            v-mask="['(##) ####-####', '(##) #####-####']"
+            :disabled="exibirFormulario === $exibirFormulario.exibir"
+            :error-messages="errors"
+            :hide-details="erroValidacao(errors)"
+            filled
+            label="Número Telefone"
+          />
+        </validation-provider>
+      </v-col>
+      <v-col
+        sm="3"
+        cols="12"
+      >
+        <v-autocomplete
+          v-model="telefoneTipo"
+          :disabled="exibirFormulario === $exibirFormulario.exibir"
+          :items="dropdownTipoTelefone"
+          filled
+          hide-details
+          item-text="descricao"
+          item-value="codigo"
+          label="Tipo Telefone"
+        />
+      </v-col>
     </v-row>
   </validation-observer>
 </template>
@@ -217,7 +253,9 @@ export default {
       sexo: null,
       tipoSanguineo: null,
       peso: null,
-      altura: null
+      altura: null,
+      telefoneNumero: null,
+      telefoneTipo: null
     }
   },
   computed: {
@@ -225,6 +263,7 @@ export default {
       'dadosExibir',
       'dropdownSexo',
       'dropdownTipoSanguineo',
+      'dropdownTipoTelefone',
       'exibirFormulario'
     ])
   },
@@ -238,6 +277,8 @@ export default {
       this.tipoSanguineo = this.dadosExibir.tipoSanguineo
       this.peso = this.dadosExibir.peso
       this.altura = this.dadosExibir.altura
+      this.telefoneNumero = this.dadosExibir.telefoneNumero
+      this.telefoneTipo = this.dadosExibir.telefoneTipo
     }
   },
   methods: {
@@ -256,7 +297,12 @@ export default {
           sexo: this.sexo,
           tipoSanguineo: this.tipoSanguineo,
           peso: this.peso,
-          altura: this.altura
+          altura: this.altura,
+          telefone: {
+            pessoaTelefoneId: this.dadosExibir.pessoaTelefoneId,
+            numero: this.$cpf.strip(this.telefoneNumero),
+            tipo: this.telefoneTipo
+          }
         }
         if (this.exibirFormulario === this.$exibirFormulario.adicionar) {
           this.salvar(dados)

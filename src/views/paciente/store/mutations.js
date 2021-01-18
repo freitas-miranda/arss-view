@@ -1,10 +1,10 @@
 import { cpf } from '@/plugins/cpf'
-import dayjs from '@/plugins/dayjs'
+import { fdate } from '@/plugins/fdate'
 
 export default {
   reset: () => {},
   setDadosExibir (state, dados) {
-    dados.dataNascimento = dayjs(dados.dataNascimento, 'YYYY-MM-DD').format('DD/MM/YYYY')
+    dados.dataNascimento = fdate.toView(dados.dataNascimento)
     state.dadosExibir = dados
   },
   setDropdown (state, dados) {
@@ -20,8 +20,9 @@ export default {
   },
   setRegistros (state, dados) {
     dados.forEach(item => {
-      item.dataNascimento = item.dataNascimento ? dayjs(item.dataNascimento, 'YYYY-MM-DD').format('DD/MM/YYYY') : item.dataNascimento
+      item.dataNascimento = fdate.toView(item.dataNascimento)
       item.cpf = cpf.format(item.cpf)
+      item.telefoneNumero = fdate.fone(item.telefoneNumero)
     })
 
     state.registros = dados

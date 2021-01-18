@@ -52,6 +52,21 @@
               </validation-provider>
             </v-col>
             <v-col
+              sm="7"
+              cols="12"
+            >
+              <v-text-field
+                v-model="nome"
+                v-uppercase
+                autofocus
+                filled
+                hide-details
+                label="Nome"
+                @click:append="listagem()"
+                @keyup.enter="listagem()"
+              />
+            </v-col>
+            <v-col
               sm="3"
               cols="12"
             >
@@ -71,21 +86,6 @@
                   @keyup.enter="listagem()"
                 />
               </validation-provider>
-            </v-col>
-            <v-col
-              sm="7"
-              cols="12"
-            >
-              <v-text-field
-                v-model="nome"
-                v-uppercase
-                autofocus
-                filled
-                hide-details
-                label="Nome"
-                @click:append="listagem()"
-                @keyup.enter="listagem()"
-              />
             </v-col>
           </v-row>
         </validation-observer>
@@ -125,25 +125,34 @@ export default {
           sortable: false,
           text: 'Ação',
           value: 'acao',
-          width: '2%'
+          width: 50
         },
         {
           align: 'end',
           text: 'Código',
           value: 'id',
-          width: '5%'
-        },
-        {
-          align: 'start',
-          text: 'CPF',
-          value: 'cpf',
-          width: '30%'
+          width: 70
         },
         {
           align: 'start',
           text: 'Nome',
           value: 'nome',
-          width: '63%'
+          width: 300
+        },
+        {
+          align: 'start',
+          text: 'CPF',
+          value: 'cpf',
+          width: 150
+        },
+        {
+          align: 'start',
+          text: 'Telefone',
+          value: 'telefoneNumero',
+          width: 150
+        },
+        {
+          sortable: false
         }
       ],
       cpf: null,

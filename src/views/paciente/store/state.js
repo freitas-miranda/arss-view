@@ -1,5 +1,6 @@
 export default {
   dadosExibir: {},
+  dropdownSexo: [],
   dropdownTipoSanguineo: [],
   dropdownTipoTelefone: [],
   exibirFormulario: null,

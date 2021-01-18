@@ -31,42 +31,6 @@
         >
           <v-row dense>
             <v-col
-              sm="2"
-              cols="12"
-            >
-              <validation-provider
-                v-slot="{ errors }"
-                name="Código"
-                rules="numeric"
-                vid="codigo"
-              >
-                <v-text-field
-                  v-model="codigo"
-                  :error-messages="errors"
-                  :hide-details="erroValidacao(errors)"
-                  filled
-                  label="Código"
-                  @click:append="listagem()"
-                  @keyup.enter="listagem()"
-                />
-              </validation-provider>
-            </v-col>
-            <v-col
-              sm="7"
-              cols="12"
-            >
-              <v-text-field
-                v-model="nome"
-                v-uppercase
-                autofocus
-                filled
-                hide-details
-                label="Nome"
-                @click:append="listagem()"
-                @keyup.enter="listagem()"
-              />
-            </v-col>
-            <v-col
               sm="3"
               cols="12"
             >
@@ -80,12 +44,27 @@
                   v-model="cpf"
                   :error-messages="errors"
                   :hide-details="erroValidacao(errors)"
+                  autofocus
                   filled
                   label="CPF"
                   @click:append="listagem()"
                   @keyup.enter="listagem()"
                 />
               </validation-provider>
+            </v-col>
+            <v-col
+              sm="9"
+              cols="12"
+            >
+              <v-text-field
+                v-model="nome"
+                v-uppercase
+                filled
+                hide-details
+                label="Nome"
+                @click:append="listagem()"
+                @keyup.enter="listagem()"
+              />
             </v-col>
           </v-row>
         </validation-observer>
@@ -118,7 +97,6 @@ export default {
   },
   data () {
     return {
-      codigo: null,
       colunas: [
         {
           align: 'center',
@@ -128,22 +106,16 @@ export default {
           width: 50
         },
         {
-          align: 'end',
-          text: 'Código',
-          value: 'id',
-          width: 70
+          align: 'start',
+          text: 'CPF',
+          value: 'cpf',
+          width: 150
         },
         {
           align: 'start',
           text: 'Nome',
           value: 'nome',
           width: 300
-        },
-        {
-          align: 'start',
-          text: 'CPF',
-          value: 'cpf',
-          width: 150
         },
         {
           align: 'start',

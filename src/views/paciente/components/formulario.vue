@@ -6,41 +6,6 @@
   >
     <v-row dense>
       <v-col
-        v-if="exibirFormulario !== $exibirFormulario.adicionar"
-        sm="2"
-        cols="12"
-      >
-        <v-text-field
-          v-model="dadosExibir.id"
-          disabled
-          hide-details
-          filled
-          label="Código"
-        />
-      </v-col>
-      <v-col
-        :sm="exibirFormulario !== $exibirFormulario.adicionar ? 5 : 7"
-        cols="12"
-      >
-        <validation-provider
-          v-slot="{ errors }"
-          name="Nome"
-          rules="required"
-          vid="nome"
-        >
-          <v-text-field
-            v-model="nome"
-            v-uppercase
-            :disabled="exibirFormulario === $exibirFormulario.exibir"
-            :error-messages="errors"
-            :hide-details="erroValidacao(errors)"
-            class="required"
-            filled
-            label="Nome"
-          />
-        </validation-provider>
-      </v-col>
-      <v-col
         sm="3"
         cols="12"
       >
@@ -60,6 +25,28 @@
             class="required"
             filled
             label="CPF"
+          />
+        </validation-provider>
+      </v-col>
+      <v-col
+        sm="7"
+        cols="12"
+      >
+        <validation-provider
+          v-slot="{ errors }"
+          name="Nome"
+          rules="required"
+          vid="nome"
+        >
+          <v-text-field
+            v-model="nome"
+            v-uppercase
+            :disabled="exibirFormulario === $exibirFormulario.exibir"
+            :error-messages="errors"
+            :hide-details="erroValidacao(errors)"
+            class="required"
+            filled
+            label="Nome"
           />
         </validation-provider>
       </v-col>
@@ -193,6 +180,7 @@
           :items="dropdownTipoSanguineo"
           filled
           hide-details
+          clearable
           item-text="descricao"
           item-value="codigo"
           label="Tipo Sanguíneo"
@@ -223,16 +211,24 @@
         sm="3"
         cols="12"
       >
-        <v-autocomplete
-          v-model="telefoneTipo"
-          :disabled="!telefoneNumero || exibirFormulario === $exibirFormulario.exibir"
-          :items="dropdownTipoTelefone"
-          filled
-          hide-details
-          item-text="descricao"
-          item-value="codigo"
-          label="Tipo Telefone"
-        />
+        <validation-provider
+          v-slot="{ errors }"
+          name="Tipo Telefone"
+          :rules="telefoneNumero ? required : null"
+          vid="telefoneTipo"
+        >
+          <v-autocomplete
+            v-model="telefoneTipo"
+            :disabled="!telefoneNumero || exibirFormulario === $exibirFormulario.exibir"
+            :items="dropdownTipoTelefone"
+            :error-messages="errors"
+            :hide-details="erroValidacao(errors)"
+            filled
+            item-text="descricao"
+            item-value="codigo"
+            label="Tipo Telefone"
+          />
+        </validation-provider>
       </v-col>
     </v-row>
   </validation-observer>
@@ -289,7 +285,7 @@ export default {
     async confirmar () {
       if (await this.$refs.form.validate()) {
         const dados = {
-          pessoaId: this.dadosExibir.id,
+          pessoaId: this.dadosExibir.pessoaId,
           cpf: this.$cpf.strip(this.cpf),
           nome: this.nome,
           cartaoSus: this.cartaoSus,

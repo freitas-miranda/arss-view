@@ -34,10 +34,10 @@
       <v-divider class="divider-app" />
       <v-card-text class="pa-5 subtitle-1">
         <span v-if="multiplos">
-          Deseja realmente excluir os registros selecionados ?
+          Confirma a exclusão dos registros selecionados ?
         </span>
         <span v-else>
-          Deseja realmente excluir o registro ?
+          Confirma a exclusão do registro?
         </span>
       </v-card-text>
       <divisao />
@@ -52,7 +52,7 @@
           @click="$emit('excluir')"
         >
           <v-icon left>
-            mdi-check-bold
+            mdi-check
           </v-icon>
           Confirmar
         </v-btn>
@@ -65,7 +65,7 @@
           @click="$emit('input', false)"
         >
           <v-icon left>
-            mdi-close-circle-outline
+            mdi-close
           </v-icon>
           Cancelar
         </v-btn>

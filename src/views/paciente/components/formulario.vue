@@ -214,7 +214,7 @@
         <validation-provider
           v-slot="{ errors }"
           name="Tipo Telefone"
-          :rules="telefoneNumero ? required : null"
+          :rules="telefoneNumero ? 'required' : ''"
           vid="telefoneTipo"
         >
           <v-autocomplete
@@ -250,6 +250,107 @@
           />
         </validation-provider>
       </v-col>
+      <v-col
+        sm="8"
+        cols="12"
+      >
+        <validation-provider
+          v-slot="{ errors }"
+          name="EnderecoLogradouro"
+          vid="enderecoLogradouro"
+        >
+          <v-text-field
+            v-model="enderecoLogradouro"
+            v-uppercase
+            :disabled="exibirFormulario === $exibirFormulario.exibir"
+            :error-messages="errors"
+            :hide-details="erroValidacao(errors)"
+            filled
+            label="Endereço"
+          />
+        </validation-provider>
+      </v-col>
+      <v-col
+        sm="2"
+        cols="12"
+      >
+        <v-text-field
+          v-model="enderecoNumero"
+          v-uppercase
+          :disabled="exibirFormulario === $exibirFormulario.exibir"
+          hide-details
+          filled
+          label="Número"
+        />
+      </v-col>
+      <v-col
+        sm="2"
+        cols="12"
+      >
+        <v-text-field
+          v-model="enderecoCep"
+          v-mask="['#####-###']"
+          :disabled="exibirFormulario === $exibirFormulario.exibir"
+          hide-details
+          filled
+          label="CEP"
+        />
+      </v-col>
+      <v-col
+        sm="6"
+        cols="12"
+      >
+        <v-text-field
+          v-model="enderecoBairro"
+          v-uppercase
+          :disabled="exibirFormulario === $exibirFormulario.exibir"
+          hide-details
+          filled
+          label="Bairro"
+        />
+      </v-col>
+      <v-col
+        sm="4"
+        cols="12"
+      >
+        <v-text-field
+          v-model="enderecoCidade"
+          v-uppercase
+          :disabled="exibirFormulario === $exibirFormulario.exibir"
+          hide-details
+          filled
+          label="Cidade"
+        />
+      </v-col>
+      <v-col
+        sm="2"
+        cols="12"
+      >
+        <validation-provider
+          v-slot="{ errors }"
+          name="Telefone"
+          rules="min:2|max:2"
+          vid="telefoneNumero"
+        >
+          <v-tooltip bottom>
+            <template v-slot:activator="{ on, attrs }">
+              <v-text-field
+                v-model="enderecoUf"
+                v-uppercase
+                :maxlength="2"
+                :disabled="exibirFormulario === $exibirFormulario.exibir"
+                :error-messages="errors"
+                :hide-details="erroValidacao(errors)"
+                filled
+                label="Estado (UF)"
+                v-bind="attrs"
+                v-on="on"
+              />
+            </template>
+            <span>Sigla do estado</span>
+          </v-tooltip>
+        </validation-provider>
+      </v-col>
     </v-row>
   </validation-observer>
 </template>
@@ -270,6 +371,12 @@ export default {
       tipoSanguineo: null,
       peso: null,
       altura: null,
+      enderecoLogradouro: null,
+      enderecoNumero: null,
+      enderecoBairro: null,
+      enderecoCep: null,
+      enderecoCidade: null,
+      enderecoUf: null,
       telefoneNumero: null,
       telefoneTipo: null,
       email: null
@@ -294,6 +401,12 @@ export default {
       this.tipoSanguineo = this.dadosExibir.tipoSanguineo
       this.peso = this.dadosExibir.peso
       this.altura = this.dadosExibir.altura
+      this.enderecoLogradouro = this.dadosExibir.enderecoLogradouro
+      this.enderecoNumero = this.dadosExibir.enderecoNumero
+      this.enderecoBairro = this.dadosExibir.enderecoBairro
+      this.enderecoCep = this.dadosExibir.enderecoCep
+      this.enderecoCidade = this.dadosExibir.enderecoCidade
+      this.enderecoUf = this.dadosExibir.enderecoUf
       this.telefoneNumero = this.dadosExibir.telefoneNumero
       this.telefoneTipo = this.dadosExibir.telefoneTipo
       this.email = this.dadosExibir.email
@@ -316,6 +429,15 @@ export default {
           tipoSanguineo: this.tipoSanguineo,
           peso: this.peso,
           altura: this.altura,
+          endereco: {
+            pessoaEnderecoId: this.dadosExibir.pessoaEnderecoId,
+            logradouro: this.enderecoLogradouro,
+            numero: this.enderecoNumero,
+            bairro: this.enderecoBairro,
+            cep: this.enderecoCep,
+            cidade: this.enderecoCidade,
+            uf: this.enderecoUf
+          },
           telefone: {
             pessoaTelefoneId: this.dadosExibir.pessoaTelefoneId,
             numero: this.$cpf.strip(this.telefoneNumero),

@@ -6,6 +6,29 @@
   >
     <v-row dense>
       <v-col
+        sm="6"
+        cols="12"
+      >
+        <validation-provider
+          v-slot="{ errors }"
+          name="Nome"
+          rules="required"
+          vid="nome"
+        >
+          <v-text-field
+            v-model="nome"
+            v-uppercase
+            :disabled="exibirFormulario === $exibirFormulario.exibir"
+            :error-messages="errors"
+            :hide-details="erroValidacao(errors)"
+            autofocus
+            class="required"
+            filled
+            label="Nome"
+          />
+        </validation-provider>
+      </v-col>
+      <v-col
         sm="3"
         cols="12"
       >
@@ -21,7 +44,6 @@
             :disabled="exibirFormulario === $exibirFormulario.exibir"
             :error-messages="errors"
             :hide-details="erroValidacao(errors)"
-            autofocus
             class="required"
             filled
             label="CPF"
@@ -29,29 +51,7 @@
         </validation-provider>
       </v-col>
       <v-col
-        sm="7"
-        cols="12"
-      >
-        <validation-provider
-          v-slot="{ errors }"
-          name="Nome"
-          rules="required"
-          vid="nome"
-        >
-          <v-text-field
-            v-model="nome"
-            v-uppercase
-            :disabled="exibirFormulario === $exibirFormulario.exibir"
-            :error-messages="errors"
-            :hide-details="erroValidacao(errors)"
-            class="required"
-            filled
-            label="Nome"
-          />
-        </validation-provider>
-      </v-col>
-      <v-col
-        sm="2"
+        sm="3"
         cols="12"
       >
         <validation-provider
@@ -230,6 +230,26 @@
           />
         </validation-provider>
       </v-col>
+      <v-col
+        sm="6"
+        cols="12"
+      >
+        <validation-provider
+          v-slot="{ errors }"
+          name="Email"
+          rules="email"
+          vid="email"
+        >
+          <v-text-field
+            v-model="email"
+            :disabled="exibirFormulario === $exibirFormulario.exibir"
+            :error-messages="errors"
+            :hide-details="erroValidacao(errors)"
+            filled
+            label="E-mail"
+          />
+        </validation-provider>
+      </v-col>
     </v-row>
   </validation-observer>
 </template>
@@ -251,7 +271,8 @@ export default {
       peso: null,
       altura: null,
       telefoneNumero: null,
-      telefoneTipo: null
+      telefoneTipo: null,
+      email: null
     }
   },
   computed: {
@@ -275,6 +296,7 @@ export default {
       this.altura = this.dadosExibir.altura
       this.telefoneNumero = this.dadosExibir.telefoneNumero
       this.telefoneTipo = this.dadosExibir.telefoneTipo
+      this.email = this.dadosExibir.email
     }
   },
   methods: {
@@ -298,6 +320,10 @@ export default {
             pessoaTelefoneId: this.dadosExibir.pessoaTelefoneId,
             numero: this.$cpf.strip(this.telefoneNumero),
             tipo: this.telefoneTipo
+          },
+          email: {
+            pessoaEmailId: this.dadosExibir.pessoaEmailId,
+            email: this.email
           }
         }
         if (this.exibirFormulario === this.$exibirFormulario.adicionar) {

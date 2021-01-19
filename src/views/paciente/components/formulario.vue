@@ -187,6 +187,17 @@
         />
       </v-col>
       <v-col
+        class="pt-3 pb-1"
+        cols="12"
+      >
+        <v-subheader
+          class="pt-3"
+        >
+          Informações para contato
+        </v-subheader>
+        <v-divider />
+      </v-col>
+      <v-col
         sm="3"
         cols="12"
       >
@@ -249,6 +260,18 @@
             label="E-mail"
           />
         </validation-provider>
+      </v-col>
+
+      <v-col
+        class="pt-3 pb-2"
+        cols="12"
+      >
+        <v-subheader
+          class="pt-3"
+        >
+          Endereço do paciente
+        </v-subheader>
+        <v-divider />
       </v-col>
       <v-col
         sm="8"

@@ -187,82 +187,6 @@
         />
       </v-col>
       <v-col
-        class="pt-3 pb-1"
-        cols="12"
-      >
-        <v-subheader
-          class="pt-3"
-        >
-          Informações para contato
-        </v-subheader>
-        <v-divider />
-      </v-col>
-      <v-col
-        sm="3"
-        cols="12"
-      >
-        <validation-provider
-          v-slot="{ errors }"
-          name="Telefone"
-          rules="min:14"
-          vid="telefoneNumero"
-        >
-          <v-text-field
-            v-model="telefoneNumero"
-            v-mask="['(##) ####-####', '(##) #####-####']"
-            :disabled="exibirFormulario === $exibirFormulario.exibir"
-            :error-messages="errors"
-            :hide-details="erroValidacao(errors)"
-            filled
-            label="Número Telefone"
-          />
-        </validation-provider>
-      </v-col>
-      <v-col
-        sm="3"
-        cols="12"
-      >
-        <validation-provider
-          v-slot="{ errors }"
-          name="Tipo Telefone"
-          :rules="telefoneNumero ? 'required' : ''"
-          vid="telefoneTipo"
-        >
-          <v-autocomplete
-            v-model="telefoneTipo"
-            :disabled="!telefoneNumero || exibirFormulario === $exibirFormulario.exibir"
-            :items="dropdownTipoTelefone"
-            :error-messages="errors"
-            :hide-details="erroValidacao(errors)"
-            filled
-            item-text="descricao"
-            item-value="codigo"
-            label="Tipo Telefone"
-          />
-        </validation-provider>
-      </v-col>
-      <v-col
-        sm="6"
-        cols="12"
-      >
-        <validation-provider
-          v-slot="{ errors }"
-          name="Email"
-          rules="email"
-          vid="email"
-        >
-          <v-text-field
-            v-model="email"
-            :disabled="exibirFormulario === $exibirFormulario.exibir"
-            :error-messages="errors"
-            :hide-details="erroValidacao(errors)"
-            filled
-            label="E-mail"
-          />
-        </validation-provider>
-      </v-col>
-
-      <v-col
         class="pt-3 pb-2"
         cols="12"
       >
@@ -372,6 +296,81 @@
             </template>
             <span>Sigla do estado</span>
           </v-tooltip>
+        </validation-provider>
+      </v-col>
+      <v-col
+        class="pt-3 pb-1"
+        cols="12"
+      >
+        <v-subheader
+          class="pt-3"
+        >
+          Informações para contato
+        </v-subheader>
+        <v-divider />
+      </v-col>
+      <v-col
+        sm="3"
+        cols="12"
+      >
+        <validation-provider
+          v-slot="{ errors }"
+          name="Telefone"
+          rules="min:14"
+          vid="telefoneNumero"
+        >
+          <v-text-field
+            v-model="telefoneNumero"
+            v-mask="['(##) ####-####', '(##) #####-####']"
+            :disabled="exibirFormulario === $exibirFormulario.exibir"
+            :error-messages="errors"
+            :hide-details="erroValidacao(errors)"
+            filled
+            label="Número Telefone"
+          />
+        </validation-provider>
+      </v-col>
+      <v-col
+        sm="3"
+        cols="12"
+      >
+        <validation-provider
+          v-slot="{ errors }"
+          name="Tipo Telefone"
+          :rules="telefoneNumero ? 'required' : ''"
+          vid="telefoneTipo"
+        >
+          <v-autocomplete
+            v-model="telefoneTipo"
+            :disabled="!telefoneNumero || exibirFormulario === $exibirFormulario.exibir"
+            :items="dropdownTipoTelefone"
+            :error-messages="errors"
+            :hide-details="erroValidacao(errors)"
+            filled
+            item-text="descricao"
+            item-value="codigo"
+            label="Tipo Telefone"
+          />
+        </validation-provider>
+      </v-col>
+      <v-col
+        sm="6"
+        cols="12"
+      >
+        <validation-provider
+          v-slot="{ errors }"
+          name="Email"
+          rules="email"
+          vid="email"
+        >
+          <v-text-field
+            v-model="email"
+            :disabled="exibirFormulario === $exibirFormulario.exibir"
+            :error-messages="errors"
+            :hide-details="erroValidacao(errors)"
+            filled
+            label="E-mail"
+          />
         </validation-provider>
       </v-col>
     </v-row>

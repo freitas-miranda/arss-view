@@ -15,37 +15,79 @@
   - Configuração workspace
     ``` js
     {
-        // settings.json
+      // settings.json
       "files.trimTrailingWhitespace": true,
-      "files.insertFinalNewline": true,
-      "terminal.integrated.shell.windows": "C:\\Program Files\\Git\\bin\\bash.exe",
-      "editor.tabSize": 2,
-      "editor.renderWhitespace": "boundary"
+      "files.insertFinalNewline": true
     }
     ```
 
-#### Entre no diretório raiz
+## Desenvolvimento
 ```bash
-$ cd arss-view
+# Clonar o repositório
+git clone git@github.com:freitas-miranda/arss-view.git
+
+# Entre no diretório raiz
+cd arss-view
+
+# Copie as variáveis de ambiente e configure
+cp .env.example .env
+
+# Instale as dependências
+yarn
+
+# Subir o cliente
+yarn serve
 ```
-#### Copie as variáveis de ambiente e configure
+
+## Gerar a Imagem Docker
 ```bash
-$ cp .env.example .env
+# Subir o serviço do docker na máquina de desenvolvimento
+
+# Buildar o projeto
+yarn && yarn lint && yarn build
+
+# Remover a imagem antiga
+docker images
+docker image rm freitasmiranda/arss-view
+
+# Gerar a imagem docker (Deve ser o .env de produção)
+docker build -t freitasmiranda/arss-view .
+
+# Fazer login docker
+docker login || docker logout
+
+# Enviar a imagem para DockerHub
+docker push freitasmiranda/arss-view
+
 ```
-#### Instale as dependências
+
+## Subir a Imagem Docker
 ```bash
-$ yarn
-```
-#### Efetue o build da aplicação
-```bash
-$ yarn build
-```
-#### Subir o servidor
-```bash
-$ yarn start
-```
-ou
-```bash
-$ yarn start-pm2
-$ pm2 save
+# Acessar a VM de produção
+ssh root@www.arss.link
+
+# Fazer login docker
+docker login
+
+# Baixar imagem
+docker pull freitasmiranda/arss-view
+
+# Subir container
+docker run --name ARSS_VIEW_C1 --restart always -p 8080:80 -e TZ=America/Porto_Velho -d freitasmiranda/arss-view
+
+# Lista de containers
+docker container ls -a
+
+# Parar o container
+docker container stop ARSS_VIEW_C1
+
+# Excluír todos containers parados
+docker container prune
+
+# Lista das imagens
+docker images
+
+# Excluír imagens
+docker image rm freitasmiranda/arss-view
+
 ```

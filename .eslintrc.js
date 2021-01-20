@@ -8,7 +8,7 @@ module.exports = {
     '@vue/standard'
   ],
   rules: {
-    // 'no-console': 'warn',
+    'no-console': 'warn',
     'no-debugger': 'error',
     'sort-imports': 2,
     'vue/eqeqeq': 'error'

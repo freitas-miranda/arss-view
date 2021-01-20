@@ -18,8 +18,7 @@ module.exports = {
       background_color: '#18BCA6'
     }
   },
-  devServer: {
-    disableHostCheck: true,
-    port: env.APP_PORT
+  css: {
+    extract: process.env.NODE_ENV === 'production' ? { ignoreOrder: true } : false
   }
 }

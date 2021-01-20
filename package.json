@@ -27,6 +27,7 @@
     "vue-the-mask": "^0.11.1",
     "vuetify": "^2.3.10",
     "vuex": "^3.5.1",
+    "webpack": "^4.0.0",
     "xlsx": "^0.16.9"
   },
   "devDependencies": {

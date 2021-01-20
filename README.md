@@ -2,7 +2,7 @@
 > Frontend do sistema ARSS
 
 ## Ambiente
- - Node.js 14.x
+ - Node.js 12.x
  - Yarn
  - PM2
 
@@ -24,12 +24,12 @@
 ## Desenvolvimento
 ```bash
 # Clonar o repositório
-git clone git@github.com:freitas-miranda/arss-view.git
+git clone -b develop git@github.com:freitas-miranda/arss-view.git
 
 # Entre no diretório raiz
 cd arss-view
 
-# Copie as variáveis de ambiente e configure
+# Configure o ambiente
 cp .env.example .env
 
 # Instale as dependências

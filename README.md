@@ -39,55 +39,32 @@ yarn
 yarn serve
 ```
 
-## Gerar a Imagem Docker
+## Produção
 ```bash
-# Subir o serviço do docker na máquina de desenvolvimento
+cd c:/git/arss-view/
 
-# Buildar o projeto
+# Buildar o cliente
 yarn && yarn lint && yarn build
 
-# Remover a imagem antiga
-docker images
-docker image rm freitasmiranda/arss-view
+# Posicionar na banch de deploy
+cd ../deploy && git checkout arss-view && git pull
 
-# Gerar a imagem docker (Deve ser o .env de produção)
-docker build -t freitasmiranda/arss-view .
+# Limpar dados antigos e copiar os dados da nova versão
+rm -rf ./dist/ && cp -r ../arss-view/dist/ ./dist/
 
-# Fazer login docker
-docker login || docker logout
+# Enviar par o servidor
+git add -A && git commit -m "v0.0.2" && git push
 
-# Enviar a imagem para DockerHub
-docker push freitasmiranda/arss-view
+# Voltar para pasta do projeto
+cd c:/git/arss-view/
 
-```
+# Acessar a vm de produção
+ssh root@arss.link
 
-## Subir a Imagem Docker
-```bash
-# Acessar a VM de produção
-ssh root@www.arss.link
+# Atualizar os arquivos do cliente
+cd /servidores/deploy && git pull
 
-# Fazer login docker
-docker login
-
-# Baixar imagem
-docker pull freitasmiranda/arss-view
-
-# Subir container
-docker run --name ARSS_VIEW_C1 --restart always -p 8080:80 -e TZ=America/Porto_Velho -d freitasmiranda/arss-view
-
-# Lista de containers
-docker container ls -a
-
-# Parar o container
-docker container stop ARSS_VIEW_C1
-
-# Excluír todos containers parados
-docker container prune
-
-# Lista das imagens
-docker images
-
-# Excluír imagens
-docker image rm freitasmiranda/arss-view
+# Limpar dados antigos e copiar os dados da nova versão
+rm -rf /usr/share/nginx/html && cp -r ./dist/ /usr/share/nginx/html
 
 ```

@@ -1,11 +1,9 @@
 <template>
   <v-col
     cols="12"
-    xs="12"
-    sm="11"
-    md="9"
-    lg="7"
-    xl="5"
+    md="12"
+    lg="10"
+    xl="8"
     offset-lg="1"
   >
     <pagina

@@ -38,6 +38,12 @@ const routes = [
         name: 'Paciente',
         path: '/paciente',
         props: { store: 'paciente' }
+      },
+      {
+        component: () => import('@/views/agendamento'),
+        name: 'Agendamento',
+        path: '/agendamento',
+        props: { store: 'agendamento' }
       }
     ]
   },

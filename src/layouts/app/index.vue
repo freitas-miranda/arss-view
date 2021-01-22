@@ -48,6 +48,15 @@
         </v-tab>
         <v-tab
           class="tab-menu"
+          to="/agendamento"
+        >
+          <v-icon left>
+            mdi-calendar-clock
+          </v-icon>
+          Agendamentos
+        </v-tab>
+        <v-tab
+          class="tab-menu"
           to="/perfil"
         >
           <v-icon left>

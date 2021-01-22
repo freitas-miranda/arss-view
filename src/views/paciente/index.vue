@@ -1,5 +1,11 @@
 <template>
-  <v-col>
+  <v-col
+    cols="12"
+    md="12"
+    lg="10"
+    xl="8"
+    offset-lg="1"
+  >
     <pagina
       :adicionar="exibirFormulario === $exibirFormulario.adicionar"
       :editar="exibirFormulario === $exibirFormulario.editar"

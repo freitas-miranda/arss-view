@@ -15,8 +15,8 @@
       :titulo-formulario="titulo"
       campos-obrigatorios
       excluir
-      subtitulo="Manutenção dos usuários do sistema"
-      titulo="Usuário"
+      subtitulo="Manutenção dos agendamentos"
+      titulo="Agendamentos"
       @confirmar="$refs.formulario.confirmar()"
       @editar="setExibirFormulario($exibirFormulario.editar)"
       @excluir="apagar(dadosExibir.id)"
@@ -159,13 +159,12 @@
 import { mapActions, mapMutations, mapState } from 'vuex'
 
 export default {
-  name: 'PaginaSistemaUsuario',
+  name: 'PaginaAgendamento',
   components: {
     formulario: () => import('./components/formulario')
   },
   data () {
     return {
-      ativo: null,
       codigo: null,
       colunas: [
         {
@@ -173,60 +172,67 @@ export default {
           sortable: false,
           text: 'Ação',
           value: 'acao',
-          width: '2%'
-        },
-        {
-          align: 'end',
-          text: 'Código',
-          value: 'id',
-          width: '5%'
+          width: 10
         },
         {
           align: 'start',
-          text: 'Nome',
-          value: 'nome',
-          width: '30%'
+          text: 'Status',
+          value: 'statusPaciente',
+          width: 50
         },
         {
           align: 'start',
-          text: 'E-mail',
-          value: 'email',
-          width: '30%'
+          text: 'Tipo',
+          value: 'tipo',
+          width: 50
         },
         {
           align: 'start',
-          text: 'Perfil de Acesso',
-          value: 'perfil',
-          width: '15%'
+          text: 'Dia',
+          value: 'dia',
+          width: 50
         },
         {
-          align: 'end',
-          text: 'Ativo',
-          value: 'ativo',
-          width: '10%'
+          align: 'start',
+          text: 'Hora',
+          value: 'hora',
+          width: 50
+        },
+        {
+          align: 'start',
+          text: 'Paciente',
+          value: 'paciente',
+          width: 100
+        },
+        {
+          align: 'start',
+          text: 'Medico',
+          value: 'medico',
+          width: 100
+        },
+        {
+          align: 'start',
+          text: 'Especialidade',
+          value: 'especialidade',
+          width: 50
         }
       ],
-      email: null,
-      nome: null,
-      perfil: null,
-      dropdownAtivo: [
-        {
-          codigo: 1,
-          descricao: 'SIM'
-        },
-        {
-          codigo: 0,
-          descricao: 'NÃO'
-        }
-      ]
+      statusPaciente: null,
+      tipo: null,
+      dia: null,
+      hora: null,
+      paciente: null,
+      medico: null
     }
   },
   computed: {
-    ...mapState('sistemaUsuario', [
+    ...mapState('agendamento', [
       'dadosExibir',
       'exibirFormulario',
       'loading',
-      'registros'
+      'registros',
+      'dropdownTipoAgendamento',
+      'dropdownStatusAgendamento'
     ]),
     titulo () {
       let titulo
@@ -243,7 +249,7 @@ export default {
           break
       }
 
-      return `${titulo} Usuário`
+      return `${titulo} Agendamento`
     }
   },
   watch: {
@@ -263,36 +269,25 @@ export default {
     }, 300)
   },
   methods: {
-    ...mapActions('sistemaUsuario', [
-      'apagar',
+    ...mapActions('agendamento', [
       'dropdown',
       'exibir',
-      'listar',
-      'redefinirSenha'
+      'listar'
     ]),
-    ...mapMutations('sistemaUsuario', [
+    ...mapMutations('agendamento', [
       'setDadosExibir',
       'setExibirFormulario'
     ]),
     async listagem () {
       if (await this.$refs.form.validate()) {
         this.listar({
-          ativo: this.ativo !== null ? this.ativo : undefined,
-          codigo: this.codigo || undefined,
-          email: this.email || undefined,
-          nome: this.nome || undefined,
-          perfil: this.perfil || undefined
+          dia: this.dia || undefined,
+          tipoAgendamento: this.tipoAgendamento || undefined,
+          statusAgendamento: this.statusAgendamento || undefined,
+          paciente: this.paciente || undefined,
+          medico: this.medico || undefined
         })
       }
-    },
-    exportarExcel () {
-      this.$exportarExcel(this.registros, this.colunas)
-    },
-    redefinirSenhaUsuario () {
-      this.redefinirSenha({
-        id: this.dadosExibir.id,
-        senha: this.$crypto('123')
-      })
     }
   }
 }

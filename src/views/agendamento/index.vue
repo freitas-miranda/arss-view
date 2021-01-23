@@ -164,8 +164,8 @@
               :loading="loading"
               color="success"
               small
-              title="Confirmars"
-              @click="setExibirFormulario(null)"
+              title="Confirmar"
+              @click="confirmar()"
             >
               <v-icon left>
                 mdi-check
@@ -178,7 +178,7 @@
               color="error"
               small
               title="Cancelar"
-              @click="setExibirFormulario(null)"
+              @click="cancelar()"
             >
               <v-icon left>
                 mdi-window-close
@@ -203,7 +203,6 @@ export default {
   },
   data () {
     return {
-      codigo: null,
       colunas: [
         {
           align: 'center',
@@ -307,7 +306,9 @@ export default {
       'dropdown',
       'exibir',
       'fechar',
-      'listar'
+      'listar',
+      'confirmar',
+      'cancelar'
     ]),
     ...mapMutations('agendamento', [
       'setDadosExibir',

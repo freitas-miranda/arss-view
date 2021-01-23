@@ -6,142 +6,167 @@
     xl="8"
     offset-lg="1"
   >
-    <pagina
-      :adicionar="exibirFormulario === $exibirFormulario.adicionar"
-      :editar="exibirFormulario === $exibirFormulario.editar"
-      :exibir="exibirFormulario === $exibirFormulario.exibir"
-      :loading="loading"
-      :mais-opcoes="exibirFormulario === $exibirFormulario.editar"
-      :titulo-formulario="titulo"
-      campos-obrigatorios
-      excluir
-      subtitulo="Manutenção dos agendamentos"
-      titulo="Agendamentos"
-      @confirmar="$refs.formulario.confirmar()"
-      @editar="setExibirFormulario($exibirFormulario.editar)"
-      @excluir="apagar(dadosExibir.id)"
-      @fechar="setExibirFormulario(null)"
-    >
-      <filtro
-        v-if="!exibirFormulario"
-        :loading="loading"
-        adicionar
-        pesquisar
-        @adicionar="setExibirFormulario($exibirFormulario.adicionar)"
-        @pesquisar="listagem()"
+    <div>
+      <v-toolbar
+        class="toolbar-titulo"
+        flat
       >
-        <validation-observer
-          ref="form"
-          autocomplete="off"
-          tag="form"
+        <v-toolbar-title>
+          <div class="text-h5 font-weight-medium">
+            Agendamentos
+          </div>
+          <div class="text-body-2">
+            Manutenção dos agendamentos
+          </div>
+        </v-toolbar-title>
+      </v-toolbar>
+      <v-container
+        fluid
+        grid-list-md
+      >
+        <filtro
+          v-if="!exibirFormulario"
+          :loading="loading"
+          pesquisar
+          @pesquisar="listagem()"
         >
-          <v-row dense>
-            <v-col
-              sm="2"
-              cols="12"
-            >
-              <v-autocomplete
-                v-model="statusAgendamento"
-                :items="dropdownStatusAgendamento"
-                filled
-                hide-details
-                clearable
-                item-text="descricao"
-                item-value="codigo"
-                label="Status"
-                @input="listagem()"
-              />
-            </v-col>
-            <v-col
-              sm="2"
-              cols="12"
-              keyup.enter="listagem()"
-            >
-              <v-autocomplete
-                v-model="tipoAgendamento"
-                :items="dropdownTipoAgendamento"
-                filled
-                hide-details
-                clearable
-                item-text="descricao"
-                item-value="codigo"
-                label="Tipo"
-                @input="listagem()"
-              />
-            </v-col>
-            <v-col
-              sm="2"
-              cols="12"
-            >
-              <date-picker
-                v-model="dia"
-                hide-details
-                label="Dia"
-              />
-            </v-col>
-            <v-col
-              sm="3"
-              cols="12"
-            >
-              <v-text-field
-                v-model="paciente"
-                v-uppercase
-                autofocus
-                filled
-                hide-details
-                label="Paciente"
-                @click:append="listagem()"
-                @keyup.enter="listagem()"
-              />
-            </v-col>
-            <v-col
-              sm="3"
-              cols="12"
-            >
-              <v-text-field
-                v-model="medico"
-                v-uppercase
-                autofocus
-                filled
-                hide-details
-                label="Medico"
-                @click:append="listagem()"
-                @keyup.enter="listagem()"
-              />
-            </v-col>
-          </v-row>
-        </validation-observer>
-      </filtro>
+          <validation-observer
+            ref="form"
+            autocomplete="off"
+            tag="form"
+          >
+            <v-row dense>
+              <v-col
+                sm="2"
+                cols="12"
+              >
+                <v-autocomplete
+                  v-model="statusAgendamento"
+                  :items="dropdownStatusAgendamento"
+                  filled
+                  hide-details
+                  clearable
+                  item-text="descricao"
+                  item-value="codigo"
+                  label="Status"
+                  @input="listagem()"
+                />
+              </v-col>
+              <v-col
+                sm="2"
+                cols="12"
+                keyup.enter="listagem()"
+              >
+                <v-autocomplete
+                  v-model="tipoAgendamento"
+                  :items="dropdownTipoAgendamento"
+                  filled
+                  hide-details
+                  clearable
+                  item-text="descricao"
+                  item-value="codigo"
+                  label="Tipo"
+                  @input="listagem()"
+                />
+              </v-col>
+              <v-col
+                sm="2"
+                cols="12"
+              >
+                <date-picker
+                  v-model="dia"
+                  hide-details
+                  label="Dia"
+                />
+              </v-col>
+              <v-col
+                sm="3"
+                cols="12"
+              >
+                <v-text-field
+                  v-model="paciente"
+                  v-uppercase
+                  autofocus
+                  filled
+                  hide-details
+                  label="Paciente"
+                  @click:append="listagem()"
+                  @keyup.enter="listagem()"
+                />
+              </v-col>
+              <v-col
+                sm="3"
+                cols="12"
+              >
+                <v-text-field
+                  v-model="medico"
+                  v-uppercase
+                  autofocus
+                  filled
+                  hide-details
+                  label="Medico"
+                  @click:append="listagem()"
+                  @keyup.enter="listagem()"
+                />
+              </v-col>
+            </v-row>
+          </validation-observer>
+        </filtro>
 
-      <template v-slot:mais-opcoes>
-        <v-list-item @click="redefinirSenhaUsuario()">
-          <v-list-item-icon class="mr-3">
-            <v-icon color="primary">
-              mdi-key-outline
-            </v-icon>
-          </v-list-item-icon>
-          <v-list-item-content>
-            <v-list-item-title>
-              Redefinir Senha
-            </v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-      </template>
+        <tabela
+          v-if="!exibirFormulario"
+          :colunas="colunas"
+          :registros="registros"
+          exibir
+          @excel="exportarExcel()"
+          @exibir="exibir($event)"
+        />
 
-      <tabela
-        v-if="!exibirFormulario"
-        :colunas="colunas"
-        :registros="registros"
-        exibir
-        @excel="exportarExcel()"
-        @exibir="exibir($event)"
-      />
-
-      <formulario
-        v-else
-        ref="formulario"
-      />
-    </pagina>
+        <v-card
+          v-else
+        >
+          <v-toolbar
+            color="primary"
+            dense
+            height="35"
+          >
+            <v-btn
+              dark
+              icon
+              title="Fechar"
+              @click="setExibirFormulario(null)"
+            >
+              <v-icon>
+                mdi-close
+              </v-icon>
+            </v-btn>
+            <v-toolbar-title class="titulo-formulario pl-1 text-h6 white--text">
+              Exibir Agendamentos
+            </v-toolbar-title>
+          </v-toolbar>
+          <formulario
+           class="pl-1 pr-1 pt-2 pb-2 mx-1"
+          />
+          <divisao />
+          <v-card-actions>
+            <v-btn
+              v-if="exibir"
+              :loading="loading"
+              color="error"
+              small
+              title="Voltar"
+              @click="setExibirFormulario(null)"
+            >
+              <v-icon left>
+                mdi-reply
+              </v-icon>
+              Voltar
+            </v-btn>
+            <v-spacer />
+          </v-card-actions>
+        </v-card>
+      </v-container>
+    </div>
   </v-col>
 </template>
 
@@ -230,12 +255,6 @@ export default {
       let titulo
 
       switch (this.exibirFormulario) {
-        case this.$exibirFormulario.adicionar:
-          titulo = 'Adicionar'
-          break
-        case this.$exibirFormulario.editar:
-          titulo = 'Editar'
-          break
         case this.$exibirFormulario.exibir:
           titulo = 'Exibir'
           break
@@ -264,6 +283,7 @@ export default {
     ...mapActions('agendamento', [
       'dropdown',
       'exibir',
+      'fechar',
       'listar'
     ]),
     ...mapMutations('agendamento', [
@@ -284,3 +304,17 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+  .titulo-formulario {
+    font-weight: 400 !important;
+  }
+
+  .toolbar-titulo {
+    border-bottom: 2px solid #e0e0e0 !important;
+    background-color: #f3f3f3 !important;
+    top: auto !important;
+    z-index: 1 !important;
+  }
+
+</style>

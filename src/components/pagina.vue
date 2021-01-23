@@ -91,30 +91,17 @@
         <divisao />
         <v-card-actions>
           <v-btn
-            v-if="adicionar || editar"
-            :loading="loading"
-            color="primary"
-            small
-            title="Confirmar"
-            @click="$emit('confirmar')"
-          >
-            <v-icon left>
-              mdi-check
-            </v-icon>
-            Confirmar
-          </v-btn>
-          <v-btn
             v-if="exibir"
             :loading="loading"
             color="primary"
             small
-            title="Editar"
-            @click="$emit('editar')"
+            title="Voltar"
+            @click="$emit('fechar')"
           >
             <v-icon left>
-              mdi-lead-pencil
+              mdi-reply
             </v-icon>
-            Editar
+            Voltar
           </v-btn>
           <v-btn
             v-if="adicionar || editar"
@@ -130,17 +117,30 @@
             Cancelar
           </v-btn>
           <v-btn
-            v-if="exibir"
+            v-if="adicionar || editar"
             :loading="loading"
-            color="error"
+            color="success"
             small
-            title="Voltar"
-            @click="$emit('fechar')"
+            title="Confirmar"
+            @click="$emit('confirmar')"
           >
             <v-icon left>
-              mdi-reply
+              mdi-check
             </v-icon>
-            Voltar
+            Confirmar
+          </v-btn>
+          <v-btn
+            v-if="exibir"
+            :loading="loading"
+            color="warning"
+            small
+            title="Editar"
+            @click="$emit('editar')"
+          >
+            <v-icon left>
+              mdi-lead-pencil
+            </v-icon>
+            Editar
           </v-btn>
           <v-spacer />
           <span

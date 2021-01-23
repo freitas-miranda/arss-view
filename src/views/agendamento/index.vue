@@ -101,7 +101,6 @@
                 <v-text-field
                   v-model="medico"
                   v-uppercase
-                  autofocus
                   filled
                   hide-details
                   label="Medico"
@@ -141,18 +140,16 @@
               </v-icon>
             </v-btn>
             <v-toolbar-title class="titulo-formulario pl-1 text-h6 white--text">
-              Exibir Agendamentos
+              Controle de Agendamentos
             </v-toolbar-title>
           </v-toolbar>
-          <formulario
-           class="pl-1 pr-1 pt-2 pb-2 mx-1"
-          />
+          <formulario class="pl-1 pr-1 pt-2 pb-2 mx-1" />
           <divisao />
           <v-card-actions>
             <v-btn
               v-if="exibir"
               :loading="loading"
-              color="error"
+              color="primary"
               small
               title="Voltar"
               @click="setExibirFormulario(null)"
@@ -161,6 +158,32 @@
                 mdi-reply
               </v-icon>
               Voltar
+            </v-btn>
+            <v-btn
+              v-if="exibir"
+              :loading="loading"
+              color="success"
+              small
+              title="Confirmars"
+              @click="setExibirFormulario(null)"
+            >
+              <v-icon left>
+                mdi-check
+              </v-icon>
+              Confirmar
+            </v-btn>
+            <v-btn
+              v-if="exibir"
+              :loading="loading"
+              color="error"
+              small
+              title="Cancelar"
+              @click="setExibirFormulario(null)"
+            >
+              <v-icon left>
+                mdi-window-close
+              </v-icon>
+              Cancelar
             </v-btn>
             <v-spacer />
           </v-card-actions>

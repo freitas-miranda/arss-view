@@ -143,6 +143,13 @@
               Controle de Agendamentos
             </v-toolbar-title>
           </v-toolbar>
+          <motivo
+            :texto.sync="dadosExibir.observacao"
+            :value.sync="modalMotivoRecusa"
+            @input="resetMotivo"
+            @cancelar="resetMotivo"
+            @confirmar="cancelar($event)"
+          />
           <formulario class="pl-1 pr-1 pt-2 pb-2 mx-1" />
           <divisao />
           <v-card-actions>
@@ -165,7 +172,7 @@
               color="success"
               small
               title="Confirmar"
-              @click="confirmar()"
+              @click="confirmar(dadosExibir.id)"
             >
               <v-icon left>
                 mdi-check
@@ -178,7 +185,7 @@
               color="error"
               small
               title="Cancelar"
-              @click="cancelar()"
+              @click="modalMotivoRecusa = true"
             >
               <v-icon left>
                 mdi-window-close
@@ -199,7 +206,8 @@ import { mapActions, mapMutations, mapState } from 'vuex'
 export default {
   name: 'PaginaAgendamento',
   components: {
-    formulario: () => import('./components/formulario')
+    formulario: () => import('./components/formulario'),
+    motivo: () => import('./components/motivo')
   },
   data () {
     return {
@@ -261,7 +269,8 @@ export default {
       paciente: null,
       medico: null,
       statusAgendamento: null,
-      tipoAgendamento: null
+      tipoAgendamento: null,
+      modalMotivoRecusa: false
     }
   },
   computed: {
@@ -324,6 +333,9 @@ export default {
           medico: this.medico || undefined
         })
       }
+    },
+    resetMotivo () {
+      this.modalMotivoRecusa = false
     }
   }
 }

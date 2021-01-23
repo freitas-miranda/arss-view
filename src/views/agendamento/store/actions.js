@@ -18,12 +18,12 @@ export const dropdown = async ({ commit }) => {
   }
 }
 
-export const confirmar = async ({ commit }, dados) => {
+export const confirmar = async ({ commit }, id) => {
   try {
     commit('setLoading', true)
 
     const res = await axios.put('/agendamento/confirmar', {
-      id: state.dadosExibir.id
+      id: id
     })
 
     if (res.data.mensagem) {
@@ -36,13 +36,13 @@ export const confirmar = async ({ commit }, dados) => {
   }
 }
 
-export const cancelar = async ({ commit }, dados) => {
+export const cancelar = async ({ commit }, observacao) => {
   try {
     commit('setLoading', true)
 
     const res = await axios.put('/agendamento/cancelar', {
       id: state.dadosExibir.id,
-      motivo: 'teste'
+      motivo: observacao
     })
 
     if (res.data.mensagem) {

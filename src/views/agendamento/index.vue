@@ -40,83 +40,73 @@
               sm="2"
               cols="12"
             >
-              <validation-provider
-                v-slot="{ errors }"
-                name="Código"
-                rules="numeric"
-                vid="codigo"
-              >
-                <v-text-field
-                  v-model="codigo"
-                  :error-messages="errors"
-                  :hide-details="erroValidacao(errors)"
-                  autofocus
-                  filled
-                  label="Código"
-                  @click:append="listagem()"
-                  @keyup.enter="listagem()"
-                />
-              </validation-provider>
-            </v-col>
-            <v-col
-              sm="3"
-              cols="12"
-            >
-              <v-text-field
-                v-model="nome"
-                v-uppercase
-                autofocus
-                filled
-                hide-details
-                label="Nome"
-                @click:append="listagem()"
-                @keyup.enter="listagem()"
-              />
-            </v-col>
-            <v-col
-              sm="3"
-              cols="12"
-            >
-              <v-text-field
-                v-model="email"
-                v-uppercase
-                autofocus
-                filled
-                hide-details
-                label="E-mail"
-                @click:append="listagem()"
-                @keyup.enter="listagem()"
-              />
-            </v-col>
-            <v-col
-              sm="2"
-              cols="12"
-            >
-              <v-text-field
-                v-model="perfil"
-                v-uppercase
-                autofocus
-                filled
-                hide-details
-                label="Perfil"
-                @click:append="listagem()"
-                @keyup.enter="listagem()"
-              />
-            </v-col>
-            <v-col
-              lg="2"
-              sm="2"
-              cols="12"
-            >
               <v-autocomplete
-                v-model="ativo"
-                :items="dropdownAtivo"
+                v-model="statusAgendamento"
+                :items="dropdownStatusAgendamento"
                 filled
                 hide-details
+                clearable
                 item-text="descricao"
                 item-value="codigo"
-                label="Ativo"
+                label="Status"
                 @input="listagem()"
+              />
+            </v-col>
+            <v-col
+              sm="2"
+              cols="12"
+              keyup.enter="listagem()"
+            >
+              <v-autocomplete
+                v-model="tipoAgendamento"
+                :items="dropdownTipoAgendamento"
+                filled
+                hide-details
+                clearable
+                item-text="descricao"
+                item-value="codigo"
+                label="Tipo"
+                @input="listagem()"
+              />
+            </v-col>
+            <v-col
+              sm="2"
+              cols="12"
+            >
+              <date-picker
+                v-model="dia"
+                hide-details
+                label="Dia"
+              />
+            </v-col>
+            <v-col
+              sm="3"
+              cols="12"
+            >
+              <v-text-field
+                v-model="paciente"
+                v-uppercase
+                autofocus
+                filled
+                hide-details
+                label="Paciente"
+                @click:append="listagem()"
+                @keyup.enter="listagem()"
+              />
+            </v-col>
+            <v-col
+              sm="3"
+              cols="12"
+            >
+              <v-text-field
+                v-model="medico"
+                v-uppercase
+                autofocus
+                filled
+                hide-details
+                label="Medico"
+                @click:append="listagem()"
+                @keyup.enter="listagem()"
               />
             </v-col>
           </v-row>
@@ -222,7 +212,9 @@ export default {
       dia: null,
       hora: null,
       paciente: null,
-      medico: null
+      medico: null,
+      statusAgendamento: null,
+      tipoAgendamento: null
     }
   },
   computed: {
@@ -281,7 +273,7 @@ export default {
     async listagem () {
       if (await this.$refs.form.validate()) {
         this.listar({
-          dia: this.dia || undefined,
+          dia: this.$fdate.toSql(this.dia),
           tipoAgendamento: this.tipoAgendamento || undefined,
           statusAgendamento: this.statusAgendamento || undefined,
           paciente: this.paciente || undefined,

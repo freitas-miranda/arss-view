@@ -62,7 +62,17 @@
       <v-spacer />
       <v-btn
         :loading="loadingAlterarSenha"
-        color="primary"
+        color="error"
+        @click="fechar()"
+      >
+        <v-icon left>
+          mdi-cancel
+        </v-icon>
+        Cancelar
+      </v-btn>
+      <v-btn
+        :loading="loadingAlterarSenha"
+        color="success"
         dark
         @click="alterar()"
       >
@@ -70,16 +80,6 @@
           mdi-check-bold
         </v-icon>
         Alterar Senha
-      </v-btn>
-      <v-btn
-        :loading="loadingAlterarSenha"
-        color="error"
-        @click="fechar()"
-      >
-        <v-icon left>
-          mdi-cancel
-        </v-icon>
-        Fechar
       </v-btn>
     </template>
   </modal>

@@ -46,19 +46,6 @@
         <v-btn
           :block="$vuetify.breakpoint.xs"
           :loading="loading"
-          color="primary"
-          dark
-          small
-          @click="$emit('excluir')"
-        >
-          <v-icon left>
-            mdi-check-bold
-          </v-icon>
-          Confirmar
-        </v-btn>
-        <v-btn
-          :block="$vuetify.breakpoint.xs"
-          :loading="loading"
           color="error"
           dark
           small
@@ -68,6 +55,19 @@
             mdi-close
           </v-icon>
           Cancelar
+        </v-btn>
+        <v-btn
+          :block="$vuetify.breakpoint.xs"
+          :loading="loading"
+          color="sucess"
+          dark
+          small
+          @click="$emit('excluir')"
+        >
+          <v-icon left>
+            mdi-check-bold
+          </v-icon>
+          Confirmar
         </v-btn>
       </v-card-actions>
     </v-card>

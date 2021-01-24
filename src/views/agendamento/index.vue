@@ -146,6 +146,7 @@
           <motivo
             :texto.sync="dadosExibir.observacao"
             :value.sync="modalMotivoRecusa"
+            :loading="loading"
             @input="resetMotivo"
             @cancelar="resetMotivo"
             @confirmar="cancelarAgendamento($event)"

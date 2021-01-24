@@ -88,6 +88,7 @@ export default {
     },
     value: {
       required: true,
+      default: false,
       type: Boolean
     }
   },

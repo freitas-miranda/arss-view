@@ -167,7 +167,7 @@
               Voltar
             </v-btn>
             <v-btn
-              v-if="exibir"
+              v-if="podeConfirmar()"
               :loading="loading"
               color="success"
               small
@@ -180,7 +180,7 @@
               Confirmar
             </v-btn>
             <v-btn
-              v-if="exibir"
+              v-if="podeCancelar()"
               :loading="loading"
               color="error"
               small
@@ -222,7 +222,7 @@ export default {
         {
           align: 'start',
           text: 'Status',
-          value: 'statusPaciente',
+          value: 'statusAgendamento',
           width: 50
         },
         {
@@ -262,7 +262,6 @@ export default {
           width: 50
         }
       ],
-      statusPaciente: null,
       tipo: null,
       dia: null,
       hora: null,
@@ -336,6 +335,15 @@ export default {
     },
     resetMotivo () {
       this.modalMotivoRecusa = false
+      this.modalMotivoRecusa = this.dadosExibir.motivo
+    },
+    podeConfirmar () {
+      // 1-Solicitado; 2-Confirmado; 3-Iniciado; 4-Finalizado; 5-Cancelado
+      return this.exibir && (this.dadosExibir.statusId === 1)
+    },
+    podeCancelar () {
+      // 1-Solicitado; 2-Confirmado; 3-Iniciado; 4-Finalizado; 5-Cancelado
+      return this.exibir && (this.dadosExibir.statusId === 1)
     }
   }
 }

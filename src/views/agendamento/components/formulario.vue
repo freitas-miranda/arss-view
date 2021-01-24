@@ -10,7 +10,7 @@
         cols="12"
       >
         <v-text-field
-          v-model="statusPaciente"
+          v-model="statusAgendamento"
           disabled
           hide-details
           filled
@@ -111,7 +111,7 @@
           filled
           disabled
           hide-details
-          label="Motivo"
+          label="Motivo do cancelamento"
           rows="2"
         />
       </v-col>
@@ -148,7 +148,7 @@ export default {
   },
   created () {
     if (this.exibirFormulario === this.$exibirFormulario.exibir) {
-      this.statusPaciente = this.dadosExibir.statusPaciente
+      this.statusAgendamento = this.dadosExibir.statusAgendamento
       this.tipo = this.dadosExibir.tipo
       this.dia = this.dadosExibir.dia
       this.hora = this.dadosExibir.hora

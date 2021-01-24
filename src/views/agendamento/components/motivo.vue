@@ -5,7 +5,7 @@
       :loading="loading"
       adicionar
       largura="1000"
-      titulo="Motivo para recusa do agendamento"
+      titulo="Recusar agendamento"
       @confirmar="salvarObservacao()"
       @cancelar="$emit('update:value', false)"
       @input="$emit('input', $event)"
@@ -15,13 +15,16 @@
         autocomplete="off"
         tag="form"
       >
+        <v-card-title>
+          Por favor, adicione o motivo da recusa do agendamento!
+        </v-card-title>
         <v-row dense>
           <v-col cols="12">
             <validation-provider
               v-slot="{ errors }"
-              name="Observação"
+              name="motivo"
               rules="required|max:1000"
-              vid="observacao"
+              vid="motivo"
             >
               <v-textarea
                 v-model="observacao"
@@ -31,7 +34,7 @@
                 dense
                 label="Motivo"
                 outlined
-                rows="10"
+                rows="5"
               />
             </validation-provider>
           </v-col>
@@ -50,7 +53,7 @@
           Voltar
         </v-btn>
         <v-btn
-          color="success"
+          color="warning"
           small
           @click="confirmar()"
         >
@@ -115,6 +118,7 @@ export default {
     },
     fechar () {
       this.$emit('update:value', false)
+      this.observacao = this.texto
     }
   }
 }

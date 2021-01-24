@@ -118,7 +118,6 @@ export default {
     },
     fechar () {
       this.$emit('update:value', false)
-      this.observacao = this.texto
     }
   }
 }

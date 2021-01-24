@@ -148,7 +148,7 @@
             :value.sync="modalMotivoRecusa"
             @input="resetMotivo"
             @cancelar="resetMotivo"
-            @confirmar="cancelar($event)"
+            @confirmar="cancelarAgendamento($event)"
           />
           <formulario class="pl-1 pr-1 pt-2 pb-2 mx-1" />
           <divisao />
@@ -172,10 +172,10 @@
               color="success"
               small
               title="Confirmar"
-              @click="confirmar(dadosExibir.id)"
+              @click="confirmarAgendamento(dadosExibir.id)"
             >
               <v-icon left>
-                mdi-check-bold
+                mdi-check-all
               </v-icon>
               Confirmar Agendamento
             </v-btn>
@@ -193,6 +193,19 @@
               Cancelar Agendamento
             </v-btn>
             <v-spacer />
+            <v-btn
+              v-if="podeVoltarParaSolicitado()"
+              :loading="loading"
+              color="warning"
+              small
+              title="Solicitado"
+              @click="voltarParaSolicitado(dadosExibir.id)"
+            >
+              <v-icon left>
+                mdi-sync
+              </v-icon>
+              Voltar Para Solicitado
+            </v-btn>
           </v-card-actions>
         </v-card>
       </v-container>
@@ -315,8 +328,9 @@ export default {
       'exibir',
       'fechar',
       'listar',
-      'confirmar',
-      'cancelar'
+      'confirmarAgendamento',
+      'cancelarAgendamento',
+      'voltarParaSolicitado'
     ]),
     ...mapMutations('agendamento', [
       'setDadosExibir',
@@ -344,6 +358,10 @@ export default {
     podeCancelar () {
       // 1-Solicitado; 2-Confirmado; 3-Iniciado; 4-Finalizado; 5-Cancelado
       return this.exibir && (this.dadosExibir.statusId === 1)
+    },
+    podeVoltarParaSolicitado () {
+      // 1-Solicitado; 2-Confirmado; 3-Iniciado; 4-Finalizado; 5-Cancelado
+      return this.exibir && (this.dadosExibir.statusId !== 1)
     }
   }
 }

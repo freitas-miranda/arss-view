@@ -52,7 +52,7 @@
           @click="$emit('excluir')"
         >
           <v-icon left>
-            mdi-check
+            mdi-check-bold
           </v-icon>
           Confirmar
         </v-btn>

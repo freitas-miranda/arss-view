@@ -66,6 +66,7 @@
               <v-text-field
                 ref="email"
                 v-model.trim="email"
+                v-lowercase
                 :error-messages="errors"
                 append-icon="mdi-email-outline"
                 label="E-mail"

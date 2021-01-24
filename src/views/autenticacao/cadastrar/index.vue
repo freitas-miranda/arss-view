@@ -23,6 +23,7 @@
             >
               <v-text-field
                 v-model.trim="email"
+                v-lowercase
                 :error-messages="errors"
                 append-icon="mdi-email-outline"
                 autofocus
@@ -40,6 +41,7 @@
             >
               <v-text-field
                 v-model="nome"
+                v-uppercase
                 :error-messages="errors"
                 append-icon="mdi-account-card-details-outline"
                 label="Nome Completo"

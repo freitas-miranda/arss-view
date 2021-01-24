@@ -175,9 +175,9 @@
               @click="confirmar(dadosExibir.id)"
             >
               <v-icon left>
-                mdi-check
+                mdi-check-bold
               </v-icon>
-              Confirmar
+              Confirmar Agendamento
             </v-btn>
             <v-btn
               v-if="podeCancelar()"
@@ -188,9 +188,9 @@
               @click="modalMotivoRecusa = true"
             >
               <v-icon left>
-                mdi-window-close
+                mdi-block-helper
               </v-icon>
-              Cancelar
+              Cancelar Agendamento
             </v-btn>
             <v-spacer />
           </v-card-actions>

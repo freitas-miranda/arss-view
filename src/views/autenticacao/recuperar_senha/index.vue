@@ -51,6 +51,7 @@
             >
               <v-text-field
                 v-model.trim="email"
+                v-lowercase
                 :error-messages="errors"
                 append-icon="mdi-email-outline"
                 autofocus

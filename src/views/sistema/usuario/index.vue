@@ -79,7 +79,7 @@
             >
               <v-text-field
                 v-model="email"
-                v-uppercase
+                v-lowercase
                 autofocus
                 filled
                 hide-details

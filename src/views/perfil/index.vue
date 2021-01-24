@@ -94,6 +94,7 @@
                   >
                     <v-text-field
                       v-model="nome"
+                      v-uppercase
                       :disabled="!editarInformacoes"
                       :error-messages="errors"
                       :hide-details="erroValidacao(errors)"
@@ -114,6 +115,7 @@
                   >
                     <v-text-field
                       v-model="email"
+                      v-lowercase
                       :disabled="!editarInformacoes"
                       :error-messages="errors"
                       :hide-details="erroValidacao(errors)"

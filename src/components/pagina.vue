@@ -125,7 +125,7 @@
             @click="$emit('confirmar')"
           >
             <v-icon left>
-              mdi-check
+              mdi-check-bold
             </v-icon>
             Confirmar
           </v-btn>

@@ -18,6 +18,7 @@ import VueMeta from 'vue-meta'
 import { cpf } from './plugins/cpf'
 import { facade } from 'vue-input-facade'
 import { fdate } from './plugins/fdate'
+import lowercase from './plugins/lowercase'
 import { mask } from 'vue-the-mask'
 import router from './router'
 import store from './store'
@@ -44,6 +45,7 @@ Vue.component('totais', () => import('./components/totais'))
 
 Vue.directive('mask', mask)
 Vue.directive('facade', facade)
+Vue.directive('lowercase', lowercase)
 Vue.directive('uppercase', uppercase)
 
 Vue.mixin({

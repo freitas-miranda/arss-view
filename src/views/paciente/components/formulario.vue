@@ -365,6 +365,7 @@
         >
           <v-text-field
             v-model="email"
+            v-lowercase
             :disabled="exibirFormulario === $exibirFormulario.exibir"
             :error-messages="errors"
             :hide-details="erroValidacao(errors)"

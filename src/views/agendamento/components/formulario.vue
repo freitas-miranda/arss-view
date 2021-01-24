@@ -11,6 +11,7 @@
       >
         <v-text-field
           v-model="statusAgendamento"
+          color="warning"
           disabled
           hide-details
           filled

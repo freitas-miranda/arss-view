@@ -53,7 +53,7 @@ cd ../deploy && git checkout arss-view && git pull
 rm -rf ./dist/ && cp -r ../arss-view/dist/ ./dist/
 
 # Enviar par o servidor
-git add -A && git commit -m "v0.0.2" && git push
+git add -A && git commit -m "v0.0.3" && git push
 
 # Voltar para pasta do projeto
 cd c:/git/arss-view/

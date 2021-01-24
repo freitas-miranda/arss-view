@@ -23,7 +23,10 @@
           class="tab-menu"
           to="/sistema/usuario"
         >
-          <v-icon left>
+          <v-icon
+            class="icon-tab"
+            left
+          >
             mdi-account-multiple
           </v-icon>
           Usuários
@@ -32,7 +35,10 @@
           class="tab-menu"
           to="/sistema/perfil"
         >
-          <v-icon left>
+          <v-icon
+            class="icon-tab"
+            left
+          >
             mdi-card-account-details-outline
           </v-icon>
           Perfil
@@ -41,7 +47,10 @@
           class="tab-menu"
           to="/paciente"
         >
-          <v-icon left>
+          <v-icon
+            class="icon-tab"
+            left
+          >
             mdi-account-outline
           </v-icon>
           Pacientes
@@ -50,7 +59,10 @@
           class="tab-menu"
           to="/agendamento"
         >
-          <v-icon left>
+          <v-icon
+            class="icon-tab"
+            left
+          >
             mdi-calendar-clock
           </v-icon>
           Agendamentos
@@ -59,7 +71,10 @@
           class="tab-menu"
           to="/perfil"
         >
-          <v-icon left>
+          <v-icon
+            class="icon-tab"
+            left
+          >
             mdi-account-circle-outline
           </v-icon>
           Perfil
@@ -221,6 +236,10 @@ export default {
 
   .v-main__wrap {
     background-color: #f0f0f0;
+  }
+
+  .icon-tab {
+    color: #f0f0f0 !important;
   }
 
 </style>

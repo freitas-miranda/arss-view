@@ -1,6 +1,5 @@
 import axios from '@/plugins/axios'
 import exibirFormulario from '@/plugins/exibir_formulario'
-import state from './state'
 
 export const dropdown = async ({ commit }) => {
   try {
@@ -36,13 +35,13 @@ export const confirmarAgendamento = async ({ commit }, id) => {
   }
 }
 
-export const cancelarAgendamento = async ({ commit }, observacao) => {
+export const cancelarAgendamento = async ({ commit }, formulario) => {
   try {
     commit('setLoading', true)
 
     const res = await axios.put('/agendamento/cancelar', {
-      id: state.dadosExibir.id,
-      motivo: observacao
+      id: formulario.id,
+      motivo: formulario.observacao
     })
 
     if (res.data.mensagem) {

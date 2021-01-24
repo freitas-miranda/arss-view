@@ -106,19 +106,6 @@
           <v-btn
             v-if="adicionar || editar"
             :loading="loading"
-            color="error"
-            small
-            title="Cancelar"
-            @click="$emit('fechar')"
-          >
-            <v-icon left>
-              mdi-window-close
-            </v-icon>
-            Cancelar
-          </v-btn>
-          <v-btn
-            v-if="adicionar || editar"
-            :loading="loading"
             color="success"
             small
             title="Confirmar"
@@ -128,6 +115,19 @@
               mdi-check-bold
             </v-icon>
             Confirmar
+          </v-btn>
+          <v-btn
+            v-if="adicionar || editar"
+            :loading="loading"
+            color="error"
+            small
+            title="Cancelar"
+            @click="$emit('fechar')"
+          >
+            <v-icon left>
+              mdi-window-close
+            </v-icon>
+            Cancelar
           </v-btn>
           <v-btn
             v-if="exibir"

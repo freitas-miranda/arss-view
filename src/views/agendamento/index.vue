@@ -144,7 +144,8 @@
             </v-toolbar-title>
           </v-toolbar>
           <motivo
-            :texto.sync="dadosExibir.observacao"
+            :id="dadosExibir.id"
+            :observacao="dadosExibir.observacao"
             :value.sync="modalMotivoRecusa"
             :loading="loading"
             @input="resetMotivo"
@@ -189,7 +190,7 @@
               @click="modalMotivoRecusa = true"
             >
               <v-icon left>
-                mdi-block-helper
+                mdi-alarm-off
               </v-icon>
               Cancelar Agendamento
             </v-btn>

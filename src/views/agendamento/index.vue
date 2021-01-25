@@ -275,6 +275,9 @@ export default {
           text: 'Especialidade',
           value: 'especialidade',
           width: 50
+        },
+        {
+          sortable: false
         }
       ],
       tipo: null,

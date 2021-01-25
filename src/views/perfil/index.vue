@@ -71,9 +71,19 @@
         cols="12"
       >
         <v-card rounded="lg">
-          <v-card-title>
-            Alterar informações
-          </v-card-title>
+          <v-toolbar
+            class="toolbar-titulo"
+            flat
+          >
+            <v-toolbar-title>
+              <div class="text-h5 font-weight-medium">
+                Perfil
+              </div>
+              <div class="text-body-2">
+                Alterar informações do perfil
+              </div>
+            </v-toolbar-title>
+          </v-toolbar>
           <v-divider />
           <v-card-text>
             <validation-observer
@@ -197,10 +207,10 @@
               </v-icon>
               Reenviar e-mail
             </v-btn>
-            <v-spacer />
             <v-btn
               v-if="!editarInformacoes"
-              color="primary"
+              color="warning"
+              small
               @click="editarInformacoes = true"
             >
               <v-icon left>
@@ -210,7 +220,8 @@
             </v-btn>
             <v-btn
               v-if="editarInformacoes"
-              color="primary"
+              color="success"
+              small
               @click="validarDados()"
             >
               <v-icon left>
@@ -221,13 +232,15 @@
             <v-btn
               v-if="editarInformacoes"
               color="error"
+              small
               @click="retornar()"
             >
               <v-icon left>
-                mdi-reply
+                mdi-close
               </v-icon>
               Retornar
             </v-btn>
+            <v-spacer />
           </v-card-actions>
         </v-card>
       </v-col>

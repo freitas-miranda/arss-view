@@ -114,7 +114,7 @@
               </v-icon>
             </v-list-item-icon>
             <v-list-item-content>
-              Sair do Portal
+              Sair
             </v-list-item-content>
           </v-list-item>
         </v-list>
@@ -138,13 +138,23 @@
         </v-icon>
       </v-btn>
       <v-btn
-        to="/cartoes"
+        to="/agendamento"
         style="height: inherit !important;"
-        value="/cartoes"
+        value="/agendamento"
       >
-        Cartões
+        Agenda
         <v-icon>
-          mdi-credit-card-outline
+          mdi-calendar-clock
+        </v-icon>
+      </v-btn>
+      <v-btn
+        to="/paciente"
+        style="height: inherit !important;"
+        value="/paciente"
+      >
+        Pacientes
+        <v-icon>
+          mdi-account-outline
         </v-icon>
       </v-btn>
       <v-btn

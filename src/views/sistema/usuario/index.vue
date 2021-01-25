@@ -173,37 +173,40 @@ export default {
           sortable: false,
           text: 'Ação',
           value: 'acao',
-          width: '2%'
+          width: '10'
         },
         {
           align: 'end',
           text: 'Código',
           value: 'id',
-          width: '5%'
+          width: '10'
         },
         {
           align: 'start',
           text: 'Nome',
           value: 'nome',
-          width: '30%'
+          width: '200'
         },
         {
           align: 'start',
           text: 'E-mail',
           value: 'email',
-          width: '30%'
+          width: '250'
         },
         {
           align: 'start',
           text: 'Perfil de Acesso',
           value: 'perfil',
-          width: '15%'
+          width: '100'
         },
         {
           align: 'end',
           text: 'Ativo',
           value: 'ativo',
-          width: '10%'
+          width: '100'
+        },
+        {
+          sortable: false
         }
       ],
       email: null,

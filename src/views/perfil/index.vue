@@ -57,7 +57,7 @@
             @click="salvarPerfil()"
           >
             <v-icon left>
-              mdi-check-bold
+              mdi-check
             </v-icon>
             Confirmar
           </v-btn>
@@ -214,7 +214,7 @@
               @click="validarDados()"
             >
               <v-icon left>
-                mdi-check-bold
+                mdi-check
               </v-icon>
               Salvar
             </v-btn>

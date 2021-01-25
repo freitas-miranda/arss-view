@@ -77,7 +77,7 @@
         @click="alterar()"
       >
         <v-icon left>
-          mdi-check-bold
+          mdi-check
         </v-icon>
         Alterar Senha
       </v-btn>

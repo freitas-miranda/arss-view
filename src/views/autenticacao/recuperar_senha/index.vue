@@ -12,7 +12,7 @@
           @click="redirecionarCadastro()"
         >
           <v-icon left>
-            mdi-check-bold
+            mdi-check
           </v-icon>
           Sim
         </v-btn>

@@ -349,6 +349,9 @@ export default {
         })
       }
     },
+    exportarExcel () {
+      this.$exportarExcel(this.registros, this.colunas)
+    },
     resetMotivo () {
       this.modalMotivoRecusa = false
       this.modalMotivoRecusa = this.dadosExibir.motivo

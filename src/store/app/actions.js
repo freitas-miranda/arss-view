@@ -24,6 +24,7 @@ export const login = async ({ commit }, dados) => {
       localStorage.setItem('login:token', res.data.token)
       localStorage.setItem('login:email', window.btoa(dados.email))
       localStorage.setItem('login:nome', window.btoa(res.data.nome))
+      localStorage.setItem('login:perfil', window.btoa(res.data.perfil))
 
       commit('app/setEmail', dados.email, { root: true })
       commit('app/setNome', res.data.nome, { root: true })
@@ -46,6 +47,7 @@ export const logout = async ({ commit }) => {
     if (res.data.mensagem) {
       localStorage.removeItem('login:token')
       localStorage.removeItem('login:nome')
+      localStorage.removeItem('login:perfil')
 
       commit('app/setNome', null, { root: true })
 

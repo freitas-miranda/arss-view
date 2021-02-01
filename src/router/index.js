@@ -4,6 +4,13 @@ import store from '@/store/'
 
 Vue.use(VueRouter)
 
+const Perfil = Object.freeze({
+  'Admin': 1,
+  'Gestor': 2,
+  'Secreataria': 3,
+  'Pacientes': 4
+})
+
 const routes = [
   {
     path: '/',
@@ -89,6 +96,11 @@ const routes = [
     component: () => import('@/views/confirmar_email')
   },
   {
+    path: '/proibido',
+    name: 'Proibido',
+    component: () => import('@/views/erro/403')
+  },
+  {
     path: '*',
     name: 'Página não encontrada',
     component: () => import('@/views/erro/404')
@@ -105,20 +117,20 @@ router.beforeEach((to, _from, next) => {
   store.commit('app/setTitulo', to.name)
 
   if (to.matched.some(record => record.meta.autenticacao)) {
-    if (localStorage.getItem('login:token')) {
-      next()
-    } else {
-      next('login')
-    }
+    if (localStorage.getItem('login:token')) next()
+    else next('login')
   } else if (to.matched.some(record => record.meta.autenticacao === false)) {
-    if (localStorage.getItem('login:token')) {
-      next('/')
-    } else {
-      next()
-    }
-  } else {
-    next()
-  }
+    if (localStorage.getItem('login:token')) next('/')
+    else next()
+  } else next()
+
+  if (to.matched[0].path !== '*' && to.path !== '/login' && to.path !== '/' && to.path !== '/proibido') {
+    const perfil = (localStorage.getItem('login:perfil'))
+    if (to.path === '/sistema/usuario') {
+      if (perfil !== window.btoa(Perfil.Admin)) next('/proibido')
+      else next()
+    } else next()
+  } else next()
 })
 
 export default router

@@ -35,7 +35,7 @@
         class="d-flex justify-center font-weight-medium text-h5"
         cols="12"
       >
-        Sem permissão para visualizar esta página.
+        Sem permissão!
       </v-col>
       <v-col
         class="d-flex justify-center mt-12"

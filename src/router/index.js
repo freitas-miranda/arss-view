@@ -1,15 +1,9 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import { rotaAutorizada } from '../store/app/actions'
 import store from '@/store/'
 
 Vue.use(VueRouter)
-
-const Perfil = Object.freeze({
-  'Admin': 1,
-  'Gestor': 2,
-  'Secreataria': 3,
-  'Pacientes': 4
-})
 
 const routes = [
   {
@@ -125,11 +119,8 @@ router.beforeEach((to, _from, next) => {
   } else next()
 
   if (to.matched[0].path !== '*' && to.path !== '/login' && to.path !== '/' && to.path !== '/proibido') {
-    const perfil = (localStorage.getItem('login:perfil'))
-    if (to.path === '/sistema/usuario') {
-      if (perfil !== window.btoa(Perfil.Admin)) next('/proibido')
-      else next()
-    } else next()
+    if (rotaAutorizada(to.path)) next()
+    else next('/proibido')
   } else next()
 })
 

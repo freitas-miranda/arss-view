@@ -1,5 +1,13 @@
 import axios from '@/plugins/axios'
 
+const Perfil = Object.freeze({
+  'Admin': 1,
+  'Gestor': 2,
+  'Secretaria': 3,
+  'Pacientes': 4,
+  'Todos': 100
+})
+
 export const alterarSenha = async ({ commit }, dados) => {
   try {
     commit('setLoadingAlterarSenha', true)
@@ -58,4 +66,27 @@ export const logout = async ({ commit }) => {
   } finally {
     commit('setLoadingLogout', false)
   }
+}
+
+export function rotaAutorizada (path) {
+  let perfil
+  switch (path) {
+    case '/sistema/perfil':
+      perfil = Perfil.Admin
+      break
+    case '/sistema/usuario':
+      perfil = Perfil.Admin
+      break
+    case '/paciente':
+      perfil = Perfil.Gestor
+      break
+    case '/agendamento':
+      perfil = Perfil.Secretaria
+      break
+    default:
+      perfil = Perfil.Todos
+      break
+  }
+  const perfilLogado = (window.atob(localStorage.getItem('login:perfil')))
+  return (perfilLogado <= perfil)
 }

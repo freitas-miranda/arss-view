@@ -18,7 +18,7 @@
           <v-text-field
             v-model="cpf"
             v-mask="['###.###.###-##']"
-            :disabled="exibirFormulario === $exibirFormulario.exibir"
+            :disabled="exibirFormulario !== $exibirFormulario.adicionar"
             :error-messages="errors"
             :hide-details="erroValidacao(errors)"
             autofocus

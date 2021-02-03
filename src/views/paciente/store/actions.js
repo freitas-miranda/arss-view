@@ -97,3 +97,15 @@ export const salvar = async ({ commit }, dados) => {
     commit('setLoading', false)
   }
 }
+
+export const existeCPF = async ({ commit }, cpf) => {
+  try {
+    commit('setLoading', true)
+
+    const res = await axios.get('/paciente/existe/' + cpf)
+
+    return res.data
+  } finally {
+    commit('setLoading', false)
+  }
+}

@@ -6,29 +6,6 @@
   >
     <v-row dense>
       <v-col
-        sm="6"
-        cols="12"
-      >
-        <validation-provider
-          v-slot="{ errors }"
-          name="Nome"
-          rules="required"
-          vid="nome"
-        >
-          <v-text-field
-            v-model="nome"
-            v-uppercase
-            :disabled="exibirFormulario === $exibirFormulario.exibir"
-            :error-messages="errors"
-            :hide-details="erroValidacao(errors)"
-            autofocus
-            class="required"
-            filled
-            label="Nome"
-          />
-        </validation-provider>
-      </v-col>
-      <v-col
         sm="3"
         cols="12"
       >
@@ -44,9 +21,35 @@
             :disabled="exibirFormulario === $exibirFormulario.exibir"
             :error-messages="errors"
             :hide-details="erroValidacao(errors)"
+            autofocus
             class="required"
             filled
             label="CPF"
+            @keydown.enter="existe()"
+            @keydown.tab="existe()"
+            @change="existe()"
+          />
+        </validation-provider>
+      </v-col>
+      <v-col
+        sm="6"
+        cols="12"
+      >
+        <validation-provider
+          v-slot="{ errors }"
+          name="Nome"
+          rules="required"
+          vid="nome"
+        >
+          <v-text-field
+            v-model="nome"
+            v-uppercase
+            :disabled="exibirFormulario === $exibirFormulario.exibir"
+            :error-messages="errors"
+            :hide-details="erroValidacao(errors)"
+            class="required"
+            filled
+            label="Nome"
           />
         </validation-provider>
       </v-col>
@@ -438,7 +441,8 @@ export default {
   methods: {
     ...mapActions('paciente', [
       'editar',
-      'salvar'
+      'salvar',
+      'existeCPF'
     ]),
     async confirmar () {
       if (await this.$refs.form.validate()) {
@@ -478,6 +482,16 @@ export default {
             id: this.dadosExibir.id,
             ...dados
           })
+        }
+      }
+    },
+    async existe () {
+      const cpf = this.$cpf.strip(this.cpf)
+      this.$refs.form.setErrors({ cpf: '' })
+      if (cpf) {
+        const res = await this.existeCPF(cpf)
+        if (res && res.erro) {
+          this.$refs.form.setErrors({ cpf: 'CPF já cadastrado!' })
         }
       }
     }

@@ -53,7 +53,7 @@ cd ../deploy && git checkout arss-view && git pull
 rm -rf ./dist/ && cp -r ../arss-view/dist/ ./dist/
 
 # Enviar par o servidor
-git add -A && git commit -m "v0.0.2" && git push
+git add -A && git commit -m "v0.0.3" && git push
 
 # Voltar para pasta do projeto
 cd c:/git/arss-view/
@@ -68,3 +68,17 @@ cd /servidores/deploy && git pull
 rm -rf /usr/share/nginx/html && cp -r ./dist/ /usr/share/nginx/html
 
 ```
+
+## Versionar Fácil
+```bash
+# Buildar o cliente
+cd c:/git/arss-view/ && yarn && yarn lint && yarn build
+
+# Enviar arquivos atualizados para o servidor
+cd ../deploy && git checkout arss-view && git pull && rm -rf ./dist/ && cp -r ../arss-view/dist/ ./dist/ && git add -A && git commit -m "v0.0.6" && git push && cd c:/git/arss-view/
+
+## Baixar os arquivos e atualizar aplicação
+ssh root@arss.link
+cd /servidores/deploy && git pull && rm -rf /usr/share/nginx/html && cp -r ./dist/ /usr/share/nginx/html
+```
+

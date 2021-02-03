@@ -27,6 +27,7 @@
         <filtro
           v-if="!exibirFormulario"
           :loading="loading"
+          adicionar
           pesquisar
           @pesquisar="listagem()"
         >

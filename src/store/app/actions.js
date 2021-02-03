@@ -69,24 +69,26 @@ export const logout = async ({ commit }) => {
 }
 
 export function rotaAutorizada (path) {
-  let perfil
+  let perfilRota
   switch (path) {
     case '/sistema/perfil':
-      perfil = Perfil.Admin
+      perfilRota = Perfil.Admin
       break
     case '/sistema/usuario':
-      perfil = Perfil.Admin
+      perfilRota = Perfil.Admin
       break
     case '/paciente':
-      perfil = Perfil.Gestor
+      perfilRota = Perfil.Gestor
       break
     case '/agendamento':
-      perfil = Perfil.Secretaria
+      perfilRota = Perfil.Secretaria
       break
     default:
-      perfil = Perfil.Todos
+      perfilRota = Perfil.Todos
       break
   }
+  if (perfilRota === Perfil.Todos) return true
+
   const perfilLogado = (window.atob(localStorage.getItem('login:perfil')))
-  return (perfilLogado <= perfil)
+  return (perfilLogado <= perfilRota)
 }

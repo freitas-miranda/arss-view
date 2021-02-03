@@ -4,7 +4,7 @@
       v-if="$vuetify.breakpoint.width > 904"
       class="px-12 py-12 mt-2 justify-center text-h5 font-weight-bold primary--text"
     >
-      Criar uma nova conta
+      CADASTRAR ACESSO
     </v-card-title>
     <v-card-text :class="$vuetify.breakpoint.width > 904 ? 'px-12' : 'px-6'">
       <validation-observer

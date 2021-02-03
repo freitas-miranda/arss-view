@@ -44,6 +44,7 @@
         <v-btn
           color="primary"
           dark
+          autofocus
           @click="$router.push('/')"
         >
           <v-icon left>

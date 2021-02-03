@@ -1,251 +1,259 @@
 <template>
-  <v-container fluid>
-    <v-dialog
-      v-model="modalSenha"
-      width="400"
-    >
-      <v-card>
-        <div>
-          <div class="pa-2 d-flex justify-center">
-            <v-img
-              :src="logo"
-              max-width="90px"
-            />
-          </div>
-          <div
-            :class="{ 'caption': $vuetify.breakpoint.xs }"
-            class="font-weight-medium d-flex justify-center pa-2"
-          >
-            Para continuar, por favor digite sua senha atual!
-          </div>
-        </div>
-        <v-divider />
-        <v-card-text class="pa-5">
-          <validation-observer
-            ref="formSenha"
-            autocomplete="off"
-            tag="form"
-            @keyup.enter="salvarPerfil()"
-            @submit.prevent
-          >
-            <validation-provider
-              ref="formSenha"
-              v-slot="{ errors }"
-              name="Senha"
-              rules="required|senha|max:64|min:6"
-              vid="senhaAtual"
-            >
-              <v-text-field
-                v-model="senhaAtual"
-                :append-icon="exibirSenhaAtual ? 'mdi-lock-open-variant-outline' : 'mdi-lock-outline'"
-                :error-messages="errors"
-                :hide-details="erroValidacao(errors)"
-                :type="exibirSenhaAtual ? 'text' : 'password'"
-                autofocus
-                label="Senha"
-                outlined
-                @click:append="exibirSenhaAtual = !exibirSenhaAtual"
-              />
-            </validation-provider>
-          </validation-observer>
-        </v-card-text>
-        <v-divider />
-        <v-card-actions>
-          <v-btn
-            color="primary"
-            block
-            @click="salvarPerfil()"
-          >
-            <v-icon left>
-              mdi-check
-            </v-icon>
-            Confirmar
-          </v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
-    <v-row>
-      <v-col
-        lg="12"
-        md="12"
-        cols="12"
+  <v-col
+    cols="12"
+    md="12"
+    lg="10"
+    xl="8"
+    offset-lg="1"
+  >
+    <v-container fluid>
+      <v-dialog
+        v-model="modalSenha"
+        width="400"
       >
-        <v-card rounded="lg">
-          <v-toolbar
-            class="toolbar-titulo"
-            flat
-          >
-            <v-toolbar-title>
-              <div class="text-h5 font-weight-medium">
-                Perfil
-              </div>
-              <div class="text-body-2">
-                Alterar informações do perfil
-              </div>
-            </v-toolbar-title>
-          </v-toolbar>
+        <v-card>
+          <div>
+            <div class="pa-2 d-flex justify-center">
+              <v-img
+                :src="logo"
+                max-width="90px"
+              />
+            </div>
+            <div
+              :class="{ 'caption': $vuetify.breakpoint.xs }"
+              class="font-weight-medium d-flex justify-center pa-2"
+            >
+              Para continuar, por favor digite sua senha atual!
+            </div>
+          </div>
           <v-divider />
-          <v-card-text>
+          <v-card-text class="pa-5">
             <validation-observer
-              ref="form"
+              ref="formSenha"
               autocomplete="off"
               tag="form"
+              @keyup.enter="salvarPerfil()"
+              @submit.prevent
             >
-              <v-row dense>
-                <v-col
-                  sm="6"
-                  cols="12"
-                >
-                  <validation-provider
-                    v-slot="{ errors }"
-                    name="Nome"
-                    rules="required|max:50"
-                    vid="nome"
-                  >
-                    <v-text-field
-                      v-model="nome"
-                      v-uppercase
-                      :disabled="!editarInformacoes"
-                      :error-messages="errors"
-                      :hide-details="erroValidacao(errors)"
-                      label="Nome"
-                      outlined
-                    />
-                  </validation-provider>
-                </v-col>
-                <v-col
-                  sm="6"
-                  cols="12"
-                >
-                  <validation-provider
-                    v-slot="{ errors }"
-                    name="E-mail"
-                    rules="required|email|max:50"
-                    vid="email"
-                  >
-                    <v-text-field
-                      v-model="email"
-                      v-lowercase
-                      :disabled="!editarInformacoes"
-                      :error-messages="errors"
-                      :hide-details="erroValidacao(errors)"
-                      label="E-mail"
-                      outlined
-                    />
-                  </validation-provider>
-                </v-col>
-                <v-col
-                  v-if="editarInformacoes"
-                  cols="12"
-                >
-                  <v-checkbox
-                    v-model="alterarSenha"
-                    class="mt-0"
-                    hide-details
-                    label="Alterar senha de acesso?"
-                  />
-                </v-col>
-                <v-col
-                  v-if="alterarSenha"
-                  sm="6"
-                  cols="12"
-                >
-                  <validation-provider
-                    v-slot="{ errors }"
-                    name="Nova Senha"
-                    rules="required|senha|max:64|min:6|confirmed:senhaConfirmacao"
-                    vid="senhaNova"
-                  >
-                    <v-text-field
-                      v-model="senhaNova"
-                      :append-icon="exibirSenhaNova ? 'mdi-lock-open-variant-outline' : 'mdi-lock-outline'"
-                      :error-messages="errors"
-                      :hide-details="erroValidacao(errors)"
-                      :type="exibirSenhaNova ? 'text' : 'password'"
-                      label="Nova Senha"
-                      outlined
-                      @click:append="exibirSenhaNova = !exibirSenhaNova"
-                    />
-                  </validation-provider>
-                </v-col>
-                <v-col
-                  v-if="alterarSenha"
-                  sm="6"
-                  cols="12"
-                >
-                  <validation-provider
-                    v-slot="{ errors }"
-                    name="Confirmar Senha"
-                    rules="required|senha|max:64|min:6"
-                    vid="senhaConfirmacao"
-                  >
-                    <v-text-field
-                      v-model="senhaConfirmacao"
-                      :append-icon="exibirSenhaConfirmacao ? 'mdi-lock-open-variant-outline' : 'mdi-lock-outline'"
-                      :error-messages="errors"
-                      :hide-details="erroValidacao(errors)"
-                      :type="exibirSenhaConfirmacao ? 'text' : 'password'"
-                      label="Confirmar Senha"
-                      outlined
-                      @click:append="exibirSenhaConfirmacao = !exibirSenhaConfirmacao"
-                    />
-                  </validation-provider>
-                </v-col>
-              </v-row>
+              <validation-provider
+                ref="formSenha"
+                v-slot="{ errors }"
+                name="Senha"
+                rules="required|senha|max:64|min:6"
+                vid="senhaAtual"
+              >
+                <v-text-field
+                  v-model="senhaAtual"
+                  :append-icon="exibirSenhaAtual ? 'mdi-lock-open-variant-outline' : 'mdi-lock-outline'"
+                  :error-messages="errors"
+                  :hide-details="erroValidacao(errors)"
+                  :type="exibirSenhaAtual ? 'text' : 'password'"
+                  autofocus
+                  label="Senha"
+                  outlined
+                  @click:append="exibirSenhaAtual = !exibirSenhaAtual"
+                />
+              </validation-provider>
             </validation-observer>
           </v-card-text>
           <v-divider />
-          <v-card-actions class="px-4">
+          <v-card-actions>
             <v-btn
-              v-if="perfil.emailConfirmacao && !editarInformacoes"
               color="primary"
-              dark
-              @click="reenviar()"
-            >
-              <v-icon left>
-                mdi-email
-              </v-icon>
-              Reenviar e-mail
-            </v-btn>
-            <v-btn
-              v-if="!editarInformacoes"
-              color="warning"
-              small
-              @click="editarInformacoes = true"
-            >
-              <v-icon left>
-                mdi-lead-pencil
-              </v-icon>
-              Editar
-            </v-btn>
-            <v-btn
-              v-if="editarInformacoes"
-              color="success"
-              small
-              @click="validarDados()"
+              block
+              @click="salvarPerfil()"
             >
               <v-icon left>
                 mdi-check
               </v-icon>
-              Salvar
+              Confirmar
             </v-btn>
-            <v-btn
-              v-if="editarInformacoes"
-              color="error"
-              small
-              @click="retornar()"
-            >
-              <v-icon left>
-                mdi-close
-              </v-icon>
-              Retornar
-            </v-btn>
-            <v-spacer />
           </v-card-actions>
         </v-card>
-      </v-col>
-    </v-row>
-  </v-container>
+      </v-dialog>
+      <v-row>
+        <v-col
+          lg="12"
+          md="12"
+          cols="12"
+        >
+          <v-card rounded="lg">
+            <v-toolbar
+              class="toolbar-titulo"
+              flat
+            >
+              <v-toolbar-title>
+                <div class="text-h5 font-weight-medium">
+                  Perfil
+                </div>
+                <div class="text-body-2">
+                  Alterar informações do perfil
+                </div>
+              </v-toolbar-title>
+            </v-toolbar>
+            <v-divider />
+            <v-card-text>
+              <validation-observer
+                ref="form"
+                autocomplete="off"
+                tag="form"
+              >
+                <v-row dense>
+                  <v-col
+                    sm="6"
+                    cols="12"
+                  >
+                    <validation-provider
+                      v-slot="{ errors }"
+                      name="Nome"
+                      rules="required|max:50"
+                      vid="nome"
+                    >
+                      <v-text-field
+                        v-model="nome"
+                        v-uppercase
+                        :disabled="!editarInformacoes"
+                        :error-messages="errors"
+                        :hide-details="erroValidacao(errors)"
+                        label="Nome"
+                        outlined
+                      />
+                    </validation-provider>
+                  </v-col>
+                  <v-col
+                    sm="6"
+                    cols="12"
+                  >
+                    <validation-provider
+                      v-slot="{ errors }"
+                      name="E-mail"
+                      rules="required|email|max:50"
+                      vid="email"
+                    >
+                      <v-text-field
+                        v-model="email"
+                        v-lowercase
+                        :disabled="!editarInformacoes"
+                        :error-messages="errors"
+                        :hide-details="erroValidacao(errors)"
+                        label="E-mail"
+                        outlined
+                      />
+                    </validation-provider>
+                  </v-col>
+                  <v-col
+                    v-if="editarInformacoes"
+                    cols="12"
+                  >
+                    <v-checkbox
+                      v-model="alterarSenha"
+                      class="mt-0"
+                      hide-details
+                      label="Alterar senha de acesso?"
+                    />
+                  </v-col>
+                  <v-col
+                    v-if="alterarSenha"
+                    sm="6"
+                    cols="12"
+                  >
+                    <validation-provider
+                      v-slot="{ errors }"
+                      name="Nova Senha"
+                      rules="required|senha|max:64|min:6|confirmed:senhaConfirmacao"
+                      vid="senhaNova"
+                    >
+                      <v-text-field
+                        v-model="senhaNova"
+                        :append-icon="exibirSenhaNova ? 'mdi-lock-open-variant-outline' : 'mdi-lock-outline'"
+                        :error-messages="errors"
+                        :hide-details="erroValidacao(errors)"
+                        :type="exibirSenhaNova ? 'text' : 'password'"
+                        label="Nova Senha"
+                        outlined
+                        @click:append="exibirSenhaNova = !exibirSenhaNova"
+                      />
+                    </validation-provider>
+                  </v-col>
+                  <v-col
+                    v-if="alterarSenha"
+                    sm="6"
+                    cols="12"
+                  >
+                    <validation-provider
+                      v-slot="{ errors }"
+                      name="Confirmar Senha"
+                      rules="required|senha|max:64|min:6"
+                      vid="senhaConfirmacao"
+                    >
+                      <v-text-field
+                        v-model="senhaConfirmacao"
+                        :append-icon="exibirSenhaConfirmacao ? 'mdi-lock-open-variant-outline' : 'mdi-lock-outline'"
+                        :error-messages="errors"
+                        :hide-details="erroValidacao(errors)"
+                        :type="exibirSenhaConfirmacao ? 'text' : 'password'"
+                        label="Confirmar Senha"
+                        outlined
+                        @click:append="exibirSenhaConfirmacao = !exibirSenhaConfirmacao"
+                      />
+                    </validation-provider>
+                  </v-col>
+                </v-row>
+              </validation-observer>
+            </v-card-text>
+            <v-divider />
+            <v-card-actions class="px-4">
+              <v-btn
+                v-if="perfil.emailConfirmacao && !editarInformacoes"
+                color="primary"
+                dark
+                @click="reenviar()"
+              >
+                <v-icon left>
+                  mdi-email
+                </v-icon>
+                Reenviar e-mail
+              </v-btn>
+              <v-btn
+                v-if="!editarInformacoes"
+                color="warning"
+                small
+                @click="editarInformacoes = true"
+              >
+                <v-icon left>
+                  mdi-lead-pencil
+                </v-icon>
+                Editar
+              </v-btn>
+              <v-btn
+                v-if="editarInformacoes"
+                color="success"
+                small
+                @click="validarDados()"
+              >
+                <v-icon left>
+                  mdi-check
+                </v-icon>
+                Salvar
+              </v-btn>
+              <v-btn
+                v-if="editarInformacoes"
+                color="error"
+                small
+                @click="retornar()"
+              >
+                <v-icon left>
+                  mdi-close
+                </v-icon>
+                Retornar
+              </v-btn>
+              <v-spacer />
+            </v-card-actions>
+          </v-card>
+        </v-col>
+      </v-row>
+    </v-container>
+  </v-col>
 </template>
 
 <script>

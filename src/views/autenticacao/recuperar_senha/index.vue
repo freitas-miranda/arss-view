@@ -31,7 +31,7 @@
       v-if="$vuetify.breakpoint.width > 904"
       class="px-12 py-12 mt-7 justify-center text-h5 font-weight-bold primary--text"
     >
-      Recuperação de senha
+      RECUPERAÇÃO DE SENHA
     </v-card-title>
     <v-card-text :class="$vuetify.breakpoint.width > 904 ? 'px-12 mt-10' : 'px-6'">
       <validation-observer

@@ -118,7 +118,7 @@ router.beforeEach((to, _from, next) => {
     else next()
   } else next()
 
-  if (to.matched[0].path !== '*' && to.path !== '/login' && to.path !== '/' && to.path !== '/proibido') {
+  if (to.matched[0].path !== '*') {
     if (rotaAutorizada(to.path)) next()
     else next('/proibido')
   } else next()

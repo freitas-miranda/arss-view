@@ -3,7 +3,7 @@ import axios from '@/plugins/axios'
 const Perfil = Object.freeze({
   'Admin': 1,
   'Gestor': 2,
-  'Secretaria': 3,
+  'Atendente': 3,
   'Pacientes': 4,
   'Todos': 100
 })
@@ -78,10 +78,10 @@ export function rotaAutorizada (path) {
       perfilRota = Perfil.Admin
       break
     case '/paciente':
-      perfilRota = Perfil.Gestor
+      perfilRota = Perfil.Atendente
       break
     case '/agendamento':
-      perfilRota = Perfil.Secretaria
+      perfilRota = Perfil.Atendente
       break
     default:
       perfilRota = Perfil.Todos

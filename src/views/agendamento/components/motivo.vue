@@ -27,7 +27,7 @@
               vid="motivo"
             >
               <v-textarea
-                v-model="observacao"
+                v-model="formulario.observacao"
                 :error-messages="errors"
                 :hide-details="!errors.length"
                 class="required"
@@ -58,7 +58,7 @@
           @click="confirmar()"
         >
           <v-icon left>
-            mdi-check-bold
+            mdi-check
           </v-icon>
           Confirmar
         </v-btn>
@@ -76,7 +76,11 @@ export default {
       default: false,
       type: Boolean
     },
-    texto: {
+    id: {
+      required: true,
+      type: Number
+    },
+    observacao: {
       required: true,
       validator: function (value) {
         return (
@@ -95,7 +99,10 @@ export default {
 
   data: () => ({
     modal: true,
-    observacao: null
+    formulario: {
+      id: null,
+      observacao: null
+    }
   }),
 
   watch: {
@@ -106,14 +113,15 @@ export default {
   },
 
   created () {
-    this.observacao = this.texto
     this.modal = this.value
+    this.formulario.id = this.id
+    this.formulario.observacao = this.observacao
   },
 
   methods: {
     async confirmar () {
       if (await this.$refs.form.validate()) {
-        this.$emit('confirmar', this.observacao)
+        this.$emit('confirmar', this.formulario)
         this.$emit('update:value', false)
       }
     },

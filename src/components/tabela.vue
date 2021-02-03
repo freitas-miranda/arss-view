@@ -102,7 +102,7 @@
             @click="$emit('escolher', item.item[itemKey])"
           >
             <v-icon size="20">
-              mdi-check-bold
+              mdi-check
             </v-icon>
           </v-btn>
           <v-btn

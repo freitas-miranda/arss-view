@@ -57,7 +57,6 @@
             :disabled="exibirFormulario === $exibirFormulario.exibir"
             :error-messages="errors"
             :hide-details="erroValidacao(errors)"
-            autofocus
             class="required"
             filled
             label="E-mail"
@@ -72,7 +71,7 @@
         <validation-provider
           v-slot="{ errors }"
           name="Senha"
-          rules="required"
+          rules="required|senha|max:64|min:6"
           vid="senha"
         >
           <v-text-field

@@ -16,7 +16,7 @@
         tag="form"
       >
         <v-card-title>
-          Por favor, adicione o motivo da recusa do agendamento!
+          Por favor, adicione o motivo da recusa!
         </v-card-title>
         <v-row dense>
           <v-col cols="12">

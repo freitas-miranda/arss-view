@@ -29,6 +29,7 @@
           :loading="loading"
           adicionar
           pesquisar
+          @adicionar="faltaDesenvolver()"
           @pesquisar="listagem()"
         >
           <validation-observer
@@ -187,13 +188,13 @@
               :loading="loading"
               color="error"
               small
-              title="Cancelar"
+              title="Recusar"
               @click="modalMotivoRecusa = true"
             >
               <v-icon left>
                 mdi-alarm-off
               </v-icon>
-              Cancelar Agendamento
+              Recusar Agendamento
             </v-btn>
             <v-spacer />
             <v-btn
@@ -371,6 +372,9 @@ export default {
     podeVoltarParaSolicitado () {
       // 1-Solicitado; 2-Confirmado; 3-Iniciado; 4-Finalizado; 5-Cancelado
       return this.exibir && (this.dadosExibir.statusId !== 1)
+    },
+    faltaDesenvolver () {
+      this.$notificacao('Recurso em construção!', 'informacao')
     }
   }
 }

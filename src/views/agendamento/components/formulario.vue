@@ -112,7 +112,7 @@
           filled
           disabled
           hide-details
-          label="Motivo do cancelamento"
+          label="Motivo da recusa"
           rows="2"
         />
       </v-col>

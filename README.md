@@ -69,7 +69,7 @@ rm -rf /usr/share/nginx/html && cp -r ./dist/ /usr/share/nginx/html
 
 ```
 
-## Versionar Fácil
+## Versionar
 ```bash
 # Buildar o cliente
 cd c:/git/arss-view/ && yarn && yarn lint && yarn build

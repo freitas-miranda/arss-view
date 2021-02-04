@@ -252,6 +252,17 @@
           </v-card>
         </v-col>
       </v-row>
+      <div class="mt-2 text-right" />
+      <v-footer padless>
+        <v-col
+          class="text-right"
+          cols="12"
+        >
+          <v-list-item-subtitle>
+            Sistema ARSS - {{ versaoSistema }}
+          </v-list-item-subtitle>
+        </v-col>
+      </v-footer>
     </v-container>
   </v-col>
 </template>
@@ -274,7 +285,8 @@ export default {
       nome: null,
       senhaAtual: null,
       senhaNova: null,
-      senhaConfirmacao: null
+      senhaConfirmacao: null,
+      versaoSistema: null
     }
   },
   computed: {
@@ -318,6 +330,8 @@ export default {
   async created () {
     const exibir = await this.exibir()
 
+    this.versaoSistema = await this.version()
+
     if (!exibir.erro) {
       this.nome = exibir.nome
       this.email = exibir.email
@@ -327,7 +341,8 @@ export default {
     ...mapActions('perfil', [
       'exibir',
       'reenviar',
-      'salvar'
+      'salvar',
+      'getVersion'
     ]),
     retornar () {
       this.modalSenha = false
@@ -364,7 +379,11 @@ export default {
       if (await this.$refs.form.validate()) {
         this.modalSenha = true
       }
+    },
+    async version () {
+      return this.getVersion()
     }
+
   }
 }
 </script>

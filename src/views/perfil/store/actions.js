@@ -1,4 +1,5 @@
 import axios from '@/plugins/axios'
+import { version } from '../../../../package.json'
 
 export const exibir = async ({ commit }) => {
   try {
@@ -47,4 +48,8 @@ export const salvar = async ({ commit }, dados) => {
   } finally {
     commit('app/setLoading', false, { root: true })
   }
+}
+
+export const getVersion = async () => {
+  return 'v' + version
 }

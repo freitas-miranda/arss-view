@@ -43,11 +43,12 @@
               <validation-provider
                 v-slot="{ errors }"
                 name="CPF"
-                rules="numeric"
+                rules="max:14"
                 vid="cpf"
               >
                 <v-text-field
                   v-model="cpf"
+                  v-mask="['###.###.###-##']"
                   :error-messages="errors"
                   :hide-details="erroValidacao(errors)"
                   autofocus
@@ -193,7 +194,7 @@ export default {
       if (await this.$refs.form.validate()) {
         this.listar({
           codigo: this.codigo || undefined,
-          cpf: this.cpf || undefined,
+          cpf: this.$cpf.strip(this.cpf) || undefined,
           nome: this.nome || undefined
         })
       }

@@ -27,7 +27,6 @@
             label="CPF"
             @keydown.enter="existe()"
             @keydown.tab="existe()"
-            @change="existe()"
           />
         </validation-provider>
       </v-col>
@@ -488,7 +487,7 @@ export default {
     async existe () {
       const cpf = this.$cpf.strip(this.cpf)
       this.$refs.form.setErrors({ cpf: '' })
-      if (cpf) {
+      if (cpf && this.exibirFormulario) {
         const res = await this.existeCPF(cpf)
         if (res && res.erro) {
           this.$refs.form.setErrors({ cpf: 'CPF já cadastrado!' })

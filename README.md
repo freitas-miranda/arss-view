@@ -5,6 +5,7 @@
  - Node.js 12.x
  - Yarn
  - PM2
+ - Nginx
 
 ## Visual Studio Code
   - Plugins
@@ -23,6 +24,7 @@
 
 ## Desenvolvimento
 ```bash
+# Usar Git Bash
 # Clonar o repositório
 git clone -b develop git@github.com:freitas-miranda/arss-view.git
 
@@ -41,19 +43,23 @@ yarn serve
 
 ## Produção
 ```bash
+# Usar Git Bash
+# Posicionar na pasta do projeto
 cd c:/git/arss-view/
 
 # Buildar o cliente
 yarn && yarn lint && yarn build
 
-# Posicionar na banch de deploy
-cd ../deploy && git checkout arss-view && git pull
+# Posicionar na pasta para versionamento
+# Necessário ter acesso ao repositório de deploy:
+# git clone git@github.com:freitas-miranda/deploy.git c:/git/deploy/
+cd c:/git/deploy/ && git checkout arss-view && git pull
 
 # Limpar dados antigos e copiar os dados da nova versão
-rm -rf ./dist/ && cp -r ../arss-view/dist/ ./dist/
+rm -rf ./dist/ && cp -r c:/git/arss-view/dist/ ./dist/
 
 # Enviar par o servidor
-git add -A && git commit -m "v0.0.3" && git push
+git add -A && git commit -m "v0.0.8" && git push
 
 # Voltar para pasta do projeto
 cd c:/git/arss-view/
@@ -67,18 +73,7 @@ cd /servidores/deploy && git pull
 # Limpar dados antigos e copiar os dados da nova versão
 rm -rf /usr/share/nginx/html && cp -r ./dist/ /usr/share/nginx/html
 
-```
-
-## Versionar
-```bash
-# Buildar o cliente
-cd c:/git/arss-view/ && yarn && yarn lint && yarn build
-
-# Enviar arquivos atualizados para o servidor
-cd ../deploy && git checkout arss-view && git pull && rm -rf ./dist/ && cp -r ../arss-view/dist/ ./dist/ && git add -A && git commit -m "v0.0.6" && git push && cd c:/git/arss-view/
-
-## Baixar os arquivos e atualizar aplicação
-ssh root@arss.link
-cd /servidores/deploy && git pull && rm -rf /usr/share/nginx/html && cp -r ./dist/ /usr/share/nginx/html
+# Verificar versão
+http://arss.link/perfil
 ```
 

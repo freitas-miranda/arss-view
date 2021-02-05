@@ -25,14 +25,14 @@
 ## Desenvolvimento
 ```bash
 # Usar Git Bash
-# Clonar o repositório
+# Clonar o ou fazer o download do repositório
 git clone -b develop git@github.com:freitas-miranda/arss-view.git
 
 # Entre no diretório raiz
 cd arss-view
 
 # Configure o ambiente
-cp .env.example .env
+notepad .env
 
 # Instale as dependências
 yarn
@@ -46,6 +46,9 @@ yarn serve
 # Usar Git Bash
 # Posicionar na pasta do projeto
 cd c:/git/arss-view/
+
+# Configure o ambiente de produção
+notepad .env
 
 # Buildar o cliente
 yarn && yarn lint && yarn build

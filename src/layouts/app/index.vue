@@ -20,6 +20,7 @@
         optional
       >
         <v-tab
+          v-if="acessarSistemaUsuario === true"
           class="tab-menu"
           to="/sistema/usuario"
         >
@@ -32,6 +33,7 @@
           Usuários
         </v-tab>
         <v-tab
+          v-if="acessarSistemaPerfil === true"
           class="tab-menu"
           to="/sistema/perfil"
         >
@@ -44,6 +46,7 @@
           Perfil
         </v-tab>
         <v-tab
+          v-if="acessarPacientes === true"
           class="tab-menu"
           to="/paciente"
         >
@@ -56,6 +59,7 @@
           Pacientes
         </v-tab>
         <v-tab
+          v-if="acessarAgendamentos === true"
           class="tab-menu"
           to="/agendamento"
         >
@@ -66,18 +70,6 @@
             mdi-calendar-clock
           </v-icon>
           Agendamentos
-        </v-tab>
-        <v-tab
-          class="tab-menu"
-          to="/perfil"
-        >
-          <v-icon
-            class="icon-tab"
-            left
-          >
-            mdi-account-circle-outline
-          </v-icon>
-          Perfil
         </v-tab>
       </v-tabs>
       <v-spacer />
@@ -117,6 +109,16 @@
               Sair
             </v-list-item-content>
           </v-list-item>
+          <v-list-item @click="acessarPerfil()">
+            <v-list-item-icon>
+              <v-icon color="secondary">
+                mdi-account-circle-outline
+              </v-icon>
+            </v-list-item-icon>
+            <v-list-item-content>
+              Perfil
+            </v-list-item-content>
+          </v-list-item>
         </v-list>
       </v-menu>
     </v-app-bar>
@@ -128,6 +130,7 @@
       grow
     >
       <v-btn
+        v-if="acessarSistemaUsuario === true"
         to="/sistema/usuario"
         style="height: inherit !important;"
         value="/sistema/usuario"
@@ -138,6 +141,7 @@
         </v-icon>
       </v-btn>
       <v-btn
+        v-if="acessarAgendamentos === true"
         to="/agendamento"
         style="height: inherit !important;"
         value="/agendamento"
@@ -148,6 +152,7 @@
         </v-icon>
       </v-btn>
       <v-btn
+        v-if="acessarPacientes === true"
         to="/paciente"
         style="height: inherit !important;"
         value="/paciente"
@@ -155,16 +160,6 @@
         Pacientes
         <v-icon>
           mdi-account-outline
-        </v-icon>
-      </v-btn>
-      <v-btn
-        to="/perfil"
-        style="height: inherit !important;"
-        value="/perfil"
-      >
-        Perfil
-        <v-icon>
-          mdi-account-circle-outline
         </v-icon>
       </v-btn>
     </v-bottom-navigation>
@@ -181,7 +176,11 @@ export default {
   name: 'LayoutAplicacao',
   data () {
     return {
-      logo: require('@/assets/logo_header.png')
+      logo: require('@/assets/logo_header.png'),
+      acessarSistemaUsuario: false,
+      acessarSistemaPerfil: false,
+      acessarPacientes: false,
+      acessarAgendamentos: false
     }
   },
   computed: {
@@ -197,17 +196,33 @@ export default {
       return this.$route.path
     }
   },
+  created () {
+    setTimeout(() => {
+      this.configurarAbas()
+    }, 300)
+  },
   methods: {
     ...mapActions('app', [
-      'logout'
+      'logout',
+      'rotaAutorizadaSinc'
     ]),
     async sairSistema () {
       const sair = await this.logout()
 
       if (sair.mensagem) this.$router.push('/login')
     },
+    async acessarPerfil () {
+      const path = '/perfil'
+      if (this.$route.path !== path) this.$router.push(path)
+    },
     voltarParaPaginaInicial () {
       this.$router.push('/').catch(() => {})
+    },
+    async configurarAbas () {
+      this.acessarSistemaUsuario = await this.rotaAutorizadaSinc('/sistema/usuario')
+      this.acessarSistemaPerfil = await this.rotaAutorizadaSinc('/sistema/perfil')
+      this.acessarPacientes = await this.rotaAutorizadaSinc('/paciente')
+      this.acessarAgendamentos = await this.rotaAutorizadaSinc('/agendamento')
     }
   }
 }

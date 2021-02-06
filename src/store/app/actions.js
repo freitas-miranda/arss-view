@@ -68,6 +68,10 @@ export const logout = async ({ commit }) => {
   }
 }
 
+export const rotaAutorizadaSinc = async ({ commit }, path) => {
+  return rotaAutorizada(path)
+}
+
 export function rotaAutorizada (path) {
   let perfilRota
   switch (path) {
@@ -87,6 +91,7 @@ export function rotaAutorizada (path) {
       perfilRota = Perfil.Todos
       break
   }
+
   if (perfilRota === Perfil.Todos) return true
 
   const perfilLogado = (window.atob(localStorage.getItem('login:perfil')))

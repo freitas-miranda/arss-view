@@ -77,6 +77,6 @@ cd /servidores/deploy && git pull
 rm -rf /usr/share/nginx/html && cp -r ./dist/ /usr/share/nginx/html
 
 # Verificar versão
-http://arss.link/perfil
+https://arss.link/perfil
 ```
 

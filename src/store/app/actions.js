@@ -85,7 +85,7 @@ export function rotaAutorizada (path) {
       perfilRota = Perfil.Atendente
       break
     case '/agendamento':
-      perfilRota = Perfil.Atendente
+      perfilRota = Perfil.Todos
       break
     default:
       perfilRota = Perfil.Todos

@@ -362,16 +362,20 @@ export default {
       this.modalMotivoRecusa = this.dadosExibir.motivo
     },
     podeConfirmar () {
+      // 1-Admin; 2-Gestor; 3-Atendente; 4-Paciente
+      const perfilLogado = (window.atob(localStorage.getItem('login:perfil')))
       // 1-Solicitado; 2-Confirmado; 3-Iniciado; 4-Finalizado; 5-Cancelado
-      return this.exibir && (this.dadosExibir.statusId === 1)
+      return this.exibir && (this.dadosExibir.statusId === 1 && perfilLogado <= 3)
     },
     podeCancelar () {
       // 1-Solicitado; 2-Confirmado; 3-Iniciado; 4-Finalizado; 5-Cancelado
       return this.exibir && (this.dadosExibir.statusId === 1)
     },
     podeVoltarParaSolicitado () {
+      // 1-Admin; 2-Gestor; 3-Atendente; 4-Paciente
+      const perfilLogado = (window.atob(localStorage.getItem('login:perfil')))
       // 1-Solicitado; 2-Confirmado; 3-Iniciado; 4-Finalizado; 5-Cancelado
-      return this.exibir && (this.dadosExibir.statusId !== 1)
+      return this.exibir && (this.dadosExibir.statusId !== 1 && perfilLogado <= 3)
     },
     faltaDesenvolver () {
       this.$notificacao('Recurso em construção!', 'informacao')
